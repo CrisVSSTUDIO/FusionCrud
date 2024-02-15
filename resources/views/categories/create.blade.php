@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<x-pricing view="categories.create" />
 <div class="container py-4">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-8 col-xl-6 shadow rounded bg-white">

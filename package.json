@@ -6,11 +6,26 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@popperjs/core": "^2.11.6",
+        "@popperjs/core": "^2.11.8",
         "axios": "^1.6.4",
-        "bootstrap": "^5.2.3",
+        "bootstrap": "^5.3.2",
         "laravel-vite-plugin": "^1.0.0",
-        "sass": "^1.56.1",
+        "sass": "^1.70.0",
         "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.5.1",
+        "@google/model-viewer": "^3.4.0",
+        "bootstrap-icons": "^1.11.3",
+        "chart.js": "^4.4.1",
+        "datatables.net-bs5": "^2.0.0",
+        "datatables.net-buttons-bs5": "^3.0.0",
+        "datatables.net-responsive-bs5": "^3.0.0",
+        "datatables.net-scroller-bs5": "^2.4.0",
+        "datatables.net-searchbuilder-bs5": "^1.7.0",
+        "datatables.net-searchpanes-bs5": "^2.3.0",
+        "jquery": "^3.7.1",
+        "jszip": "^3.10.1",
+        "pdfmake": "^0.2.9"
     }
 }

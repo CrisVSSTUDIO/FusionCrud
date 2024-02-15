@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<x-pricing view="products.create"/>
 
 <div class="container py-4">
     <div class="row d-flex justify-content-center align-items-center h-100">

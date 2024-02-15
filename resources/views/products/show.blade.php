@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-<x-pricing view="products.show" />
 
 
 <div class="container">
