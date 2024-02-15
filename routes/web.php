@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TrashedController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -34,8 +35,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/{id}/forcedelete', [ProductController::class, 'forceDelete'])->name('deleteasset');
         Route::resource('products', ProductController::class);
     });
-/*     Route::get('/trashed', [TrashedController::class, 'index'])->name('trashed');
- */
+   Route::get('/trashed', [TrashedController::class, 'index'])->name('trashed');
+
     Route::post('/{id}/restore', [CategoryController::class, 'restore'])->name('restorecat');
     Route::post('/{id}/forcedelete', [CategoryController::class, 'forceDelete'])->name('deletecat');
     Route::resource('categories', CategoryController::class);

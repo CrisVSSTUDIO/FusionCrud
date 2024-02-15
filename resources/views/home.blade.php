@@ -11,15 +11,57 @@
     /*
  * Sidebar
  */
+.sidebar {
+  top: 0;
+  /* rtl:raw:
+  right: 0;
+  */
+  bottom: 0;
+  /* rtl:remove */
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+}
 
-    body {
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+    height:auto;
+  }
+}
+
+
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #727272;
+}
+
+.sidebar .nav-link.active {
+  color: #2470dc;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+  /*   body {
         min-height: 100vh;
         min-height: -webkit-fill-available;
     }
 
     html {
         height: -webkit-fill-available;
-    }
+    } */
 
     main {
         height: 100vh;
@@ -234,49 +276,56 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+        <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-2 shadow collapse show " >
             <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+                
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                 </div>
+                <div class="position-sticky pt-3">
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                     <ul class="nav flex-column">
                         <li class="mb-1">
-                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                                Home
+                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#categories-collapse" aria-expanded="false">
+                                Categories
                             </button>
-                            <div class="collapse" id="home-collapse" style="">
+                            <div class="collapse" id="categories-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
+                                    <li><a href="{{route('categories.create')}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add new category</a></li>
+                                    <li><a href="{{route('categories.index')}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Show all categories</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
-                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                                Dashboard
+                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#assets-collapse" aria-expanded="false">
+                                Assets
                             </button>
-                            <div class="collapse" id="dashboard-collapse">
+                            <div class="collapse" id="assets-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                                    <li><a href="{{route('products.create')}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add new asset</a></li>
+                                    <li><a href="{{route('products.index')}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Show all assets</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#trashed" aria-expanded="false">
+                                Trashed items </button>
+                            <div class="collapse" id="trashed">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="{{route('trashed')}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Show all trashed items</a></li>
+
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                                Orders
-                            </button>
+                                Analytics </button>
                             <div class="collapse" id="orders-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Analytics page</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -301,15 +350,15 @@
                                     @endif
                                     @else
                                     <li class="nav-item ">
-                                      
 
-                                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">  {{ __('Logout') }}
-                                            </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
+                                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"> {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
                                     </li>
                                     @endguest
                                 </ul>
@@ -317,10 +366,11 @@
                         </li>
                     </ul>
                 </div>
+                </div>
             </div>
         </div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 vh-100">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
@@ -335,137 +385,7 @@
                         This week
                     </button>
                 </div>
-            </div>
-
-
-            <h2>Section title</h2>
-            <div class="table-responsive small">
-                <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1,001</td>
-                            <td>random</td>
-                            <td>data</td>
-                            <td>placeholder</td>
-                            <td>text</td>
-                        </tr>
-                        <tr>
-                            <td>1,002</td>
-                            <td>placeholder</td>
-                            <td>irrelevant</td>
-                            <td>visual</td>
-                            <td>layout</td>
-                        </tr>
-                        <tr>
-                            <td>1,003</td>
-                            <td>data</td>
-                            <td>rich</td>
-                            <td>dashboard</td>
-                            <td>tabular</td>
-                        </tr>
-                        <tr>
-                            <td>1,003</td>
-                            <td>information</td>
-                            <td>placeholder</td>
-                            <td>illustrative</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,004</td>
-                            <td>text</td>
-                            <td>random</td>
-                            <td>layout</td>
-                            <td>dashboard</td>
-                        </tr>
-                        <tr>
-                            <td>1,005</td>
-                            <td>dashboard</td>
-                            <td>irrelevant</td>
-                            <td>text</td>
-                            <td>placeholder</td>
-                        </tr>
-                        <tr>
-                            <td>1,006</td>
-                            <td>dashboard</td>
-                            <td>illustrative</td>
-                            <td>rich</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,007</td>
-                            <td>placeholder</td>
-                            <td>tabular</td>
-                            <td>information</td>
-                            <td>irrelevant</td>
-                        </tr>
-                        <tr>
-                            <td>1,008</td>
-                            <td>random</td>
-                            <td>data</td>
-                            <td>placeholder</td>
-                            <td>text</td>
-                        </tr>
-                        <tr>
-                            <td>1,009</td>
-                            <td>placeholder</td>
-                            <td>irrelevant</td>
-                            <td>visual</td>
-                            <td>layout</td>
-                        </tr>
-                        <tr>
-                            <td>1,010</td>
-                            <td>data</td>
-                            <td>rich</td>
-                            <td>dashboard</td>
-                            <td>tabular</td>
-                        </tr>
-                        <tr>
-                            <td>1,011</td>
-                            <td>information</td>
-                            <td>placeholder</td>
-                            <td>illustrative</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,012</td>
-                            <td>text</td>
-                            <td>placeholder</td>
-                            <td>layout</td>
-                            <td>dashboard</td>
-                        </tr>
-                        <tr>
-                            <td>1,013</td>
-                            <td>dashboard</td>
-                            <td>irrelevant</td>
-                            <td>text</td>
-                            <td>visual</td>
-                        </tr>
-                        <tr>
-                            <td>1,014</td>
-                            <td>dashboard</td>
-                            <td>illustrative</td>
-                            <td>rich</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,015</td>
-                            <td>random</td>
-                            <td>tabular</td>
-                            <td>information</td>
-                            <td>text</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            </div> @yield('crud-content')
         </main>
     </div>
 </div>

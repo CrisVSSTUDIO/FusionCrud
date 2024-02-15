@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products =  Product::join('categories', 'products.category_id', '=', 'categories.id')->select('products.id', 'products.name', 'products.description', 'products.upload', 'products.slug', 'categories.category_name')->curosr();
+        $products =  Product::join('categories', 'products.category_id', '=', 'categories.id')->select('products.id', 'products.name', 'products.description', 'products.upload', 'products.slug', 'categories.category_name')->cursor();
         // $categoryProducts = Category::with('products')->where('slug', $category_slug)->get();
         //gets all products related to that category in an optimized way
         return view('products.index', compact('products')); //return the view all that data
