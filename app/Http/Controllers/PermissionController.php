@@ -12,8 +12,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //fazer um middleware
-        
+        //fazer um middleware se fores funcionario nao podes aceder x rotas
+
      
         if (  !Auth::user()->hasRole('Super Admin')) {
 
