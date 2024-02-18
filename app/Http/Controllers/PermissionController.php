@@ -13,12 +13,11 @@ class PermissionController extends Controller
     public function index()
     {
         //
-        dd($roles = Auth::user()->getRoleNames() // Retorna uma coleção
-    );
-       /*  if (auth()->user()->hasRole('Super Admin')) {
+     
+        if (  !Auth::user()->hasRole('Super Admin')) {
 
             abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
-        } */
+        }
     }
 
     /**
