@@ -12,7 +12,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        //fazer um middleware
+        
      
         if (  !Auth::user()->hasRole('Super Admin')) {
 
