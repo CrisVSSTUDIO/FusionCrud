@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('category_name');
             $table->string('slug');
             $table->text('category_description')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+         
             $table->index(['created_at', 'updated_at']);
             $table->timestamps();
             $table->softDeletes();

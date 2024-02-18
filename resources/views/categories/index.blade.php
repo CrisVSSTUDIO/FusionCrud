@@ -1,9 +1,11 @@
-@extends('layouts.app')
-@section('content')
+@extends('home')
+@section('crud-content')
 
 
 <section class="categories">
+    <x-alert-success />
 
+    <x-alert-error />
 
     <div class="container">
         <div class="row">

@@ -1,5 +1,8 @@
 @extends('home')
 @section('crud-content')
+<x-alert-success />
+
+<x-alert-error />
 <table id="myTable" class="table">
     <thead>
         <tr>

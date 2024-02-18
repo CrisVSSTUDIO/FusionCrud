@@ -10,12 +10,20 @@ use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('auth');
+       $this->middleware('permission:create-category|edit-category|delete-category', ['only' => ['index','show']]);
+       $this->middleware('permission:create-category', ['only' => ['create','store']]);
+       $this->middleware('permission:edit-category', ['only' => ['edit','update']]);
+       $this->middleware('permission:delete-category', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::where('user_id', '=', Auth::user()->id)->get();
+        $categories = Category::get();
         return view('categories.index', compact('categories'));
     }
 
@@ -38,7 +46,6 @@ class CategoryController extends Controller
             'category_name' => $request->get('category_name'),
             'category_description' => $request->get('category_description'),
             'slug' => Str::slug($request->get('category_name')),
-            'user_id' => Auth::id()
 
         ]);
         $category->save();
@@ -71,7 +78,6 @@ class CategoryController extends Controller
             'category_name' => $request->get('category_name'),
             'category_description' => $request->get('category_description'),
             'slug' => Str::slug($request->get('category_name')),
-            'user_id' => Auth::id()
         ]);
 
         return back()->with('success', 'Categoria atualizada com sucesso!');

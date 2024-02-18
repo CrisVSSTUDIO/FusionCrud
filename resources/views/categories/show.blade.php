@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+@extends('home')
+@section('crud-content')
 
 <section class="category">
     <div class="container">
