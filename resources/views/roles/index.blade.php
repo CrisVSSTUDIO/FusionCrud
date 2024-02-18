@@ -6,7 +6,7 @@
         @can('create-role')
         <a href="{{ route('roles.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Nova função</a>
         @endcan
-        <table class="table table-striped table-bordered table responsive" id="roleTable">
+        <table class="table table-striped table-bordered table responsive" id="rolesTable">
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
@@ -47,7 +47,13 @@
 
     </div>
 </div>
-<script>
-    let table = new DataTable('#roleTable');
+
+<script type="module">
+    $('#rolesTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf', 'csv'
+        ]
+    });
 </script>
 @endsection

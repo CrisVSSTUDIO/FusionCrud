@@ -11,7 +11,7 @@ class TrashedController extends Controller
 {
     public function index()
     {
-        $productsCrapped = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.user_id', '=', Auth::user()->id)->select('products.*')->whereNotNull('products.deleted_at')->get();
+        $productsCrapped = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->select('products.*')->whereNotNull('products.deleted_at')->get();
         $categoriesCrapped = Category::onlyTrashed()->get();
         return view('trashed.index', compact('productsCrapped', 'categoriesCrapped'));
     }

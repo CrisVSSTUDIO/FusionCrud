@@ -1,6 +1,9 @@
 @extends('home')
 @section('crud-content')
 <div class="container py-4">
+    <x-alert-success />
+
+<x-alert-error />
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-8 col-xl-6 shadow rounded bg-white">
             <h2 class="fw-bold p-3 text-primary text-center">Criar Categoria</h2>

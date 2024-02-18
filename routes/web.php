@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TrashedController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
         'roles' => RoleController::class,
         'users' => UserController::class,
         'products' => ProductController::class,
+        'categories' => CategoryController::class,
+        'permission' => PermissionController::class
     ]);
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
     Route::prefix('products')->group(function () {
@@ -48,7 +51,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/{id}/restore', [CategoryController::class, 'restore'])->name('restorecat');
     Route::post('/{id}/forcedelete', [CategoryController::class, 'forceDelete'])->name('deletecat');
-    Route::resource('categories', CategoryController::class);
 
     // Route::get('/categories/{category}/products', ['CategoryController', 'index']);
 
