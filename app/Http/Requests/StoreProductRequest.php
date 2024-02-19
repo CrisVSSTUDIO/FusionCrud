@@ -24,7 +24,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|max:255|unique:assets',
+            'name' => 'required|max:255|unique:products',
             'description' => 'required',
             'upload' => 'required|file|mimetypes:image/jpeg,image/png,image/gif,image/svg+xml,gltf,application/vnd.rar,image/webp,image/avif,application/pdf,model/gltf-binary,application/octet-stream,application/x-zip-compressed,text/csv,application/wavefront-obj',
             'category' => 'required',

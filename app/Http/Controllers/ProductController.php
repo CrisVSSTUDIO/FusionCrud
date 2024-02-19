@@ -61,7 +61,7 @@ class ProductController extends Controller
 
         ]);
         $product->save();
-        return redirect('products')->with('success', '    product criado com sucesso');
+        return redirect('/products')->with('success', 'product criado com sucesso');
     }
 
     /**
