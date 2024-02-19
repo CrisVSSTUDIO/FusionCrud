@@ -20,6 +20,8 @@
     <div id="app">
         <main>
             @yield('content')
+            <x-dark-toggle />
+
         </main>
     </div>
 </body>
