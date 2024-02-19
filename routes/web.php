@@ -11,6 +11,7 @@ use App\Http\Controllers\TrashedController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
+    Route::get('/userinfo', [UserProfileController::class, 'index'])->name('getuserprofile');
+    Route::put('/userinfo', [UserProfileController::class, 'update'])->name('userinfo');
     Route::resources([
         'roles' => RoleController::class,
         'users' => UserController::class,
