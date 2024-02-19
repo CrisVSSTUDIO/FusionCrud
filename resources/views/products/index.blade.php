@@ -3,7 +3,7 @@
 <x-alert-success />
 
 <x-alert-error />
-<table id="myTable" class="table">
+<table id="productsTable" class="table">
     <thead>
         <tr>
             <th>Nome</th>
@@ -29,7 +29,7 @@
     </tbody>
 </table>
 <script type="module">
-    $('#myTable').DataTable({
+    $('#productsTable').DataTable({
         dom: 'Bfrtip',
         buttons: [
             'copy', 'excel', 'pdf', 'csv'
