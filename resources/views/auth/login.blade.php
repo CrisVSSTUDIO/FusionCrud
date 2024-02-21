@@ -18,7 +18,7 @@
                         <div class="card-body p-md-4 p-sm-4 mx-md-4 shadow">
 
                             <div class="text-center">
-                                <img src="{{asset('resources\assets\Logo-FAY-Color.png')}}" style="width: 185px;" alt="logo">
+                                <img src="{{ asset('assets\icon\logo_icon_tab.png') }}" style="width: 185px;" alt="logo">
 
                             </div>
                             <div class="row p-sm-4">

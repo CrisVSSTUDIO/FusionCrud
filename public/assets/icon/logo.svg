@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="89.835564mm"
+   height="54.144638mm"
+   viewBox="0 0 89.835564 54.144638"
+   version="1.1"
+   id="svg5"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient1382">
+      <stop
+         style="stop-color:#0000c8;stop-opacity:1;"
+         offset="0"
+         id="stop1378" />
+      <stop
+         style="stop-color:#0000c8;stop-opacity:0;"
+         offset="1"
+         id="stop1380" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient1382"
+       id="linearGradient1384"
+       x1="52.131046"
+       y1="176.97984"
+       x2="156.41708"
+       y2="176.97984"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     id="layer2"
+     transform="translate(-14.292664,-19.919934)">
+    <rect
+       style="fill:#ffcc00;fill-opacity:1;stroke:#cccccc;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect26841"
+       width="88.835564"
+       height="15.458864"
+       x="14.792664"
+       y="58.105709"
+       ry="1.971266" />
+    <rect
+       style="fill:#ffcc00;fill-opacity:1;stroke:#cccccc;stroke-width:0.208009;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect872"
+       width="88.835625"
+       height="14.973425"
+       x="222.82558"
+       y="121.82436"
+       ry="1.909363" />
+  </g>
+  <g
+     id="layer1"
+     transform="translate(-14.292664,-19.919934)">
+    <g
+       id="g2464"
+       transform="matrix(0.48875663,0,0,0.48875663,18.706555,37.422045)"
+       style="stroke:#0000c8;stroke-opacity:1">
+      <ellipse
+         style="fill:none;stroke:#0000c8;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path1241"
+         cx="104.85745"
+         cy="118.91836"
+         rx="30.164799"
+         ry="12.568666" />
+      <ellipse
+         style="fill:none;stroke:#0000c8;stroke-width:3.09818;stroke-opacity:1"
+         id="ellipse1417"
+         cx="104.85745"
+         cy="167.11967"
+         rx="30.164799"
+         ry="12.568666" />
+      <path
+         style="fill:none;stroke:#0000c8;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 74.692652,118.91836 v 48.20131"
+         id="path2064" />
+      <path
+         style="fill:none;stroke:#0000c8;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 135.02225,118.91836 v 48.20131"
+         id="path2066" />
+    </g>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.58941;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect31"
+       width="75.746872"
+       height="56.355675"
+       x="32.082893"
+       y="85.077759"
+       ry="0"
+       rx="8.4768486" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.4666px;line-height:1.25;font-family:sans-serif;fill:#0000c8;fill-opacity:1;stroke:#0000c8;stroke-width:0.140177;stroke-opacity:1"
+       x="42.249031"
+       y="137.29607"
+       id="text6805"><tspan
+         id="tspan6803"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.4666px;font-family:System-ui;-inkscape-font-specification:System-ui;fill:#0000c8;fill-opacity:1;stroke:#0000c8;stroke-width:0.140177;stroke-opacity:1"
+         x="42.249031"
+         y="137.29607">AssetShizz</tspan></text>
+    <g
+       id="g4940"
+       transform="matrix(0.48875663,0,0,0.48875663,20.082555,93.051752)"
+       style="stroke:#0000c8;stroke-opacity:1">
+      <ellipse
+         style="fill:none;stroke:#0000c8;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse4932"
+         cx="104.85745"
+         cy="118.91836"
+         rx="30.164799"
+         ry="12.568666" />
+      <ellipse
+         style="fill:none;stroke:#0000c8;stroke-width:3.09818;stroke-opacity:1"
+         id="ellipse4934"
+         cx="104.85745"
+         cy="167.11967"
+         rx="30.164799"
+         ry="12.568666" />
+      <path
+         style="fill:none;stroke:#0000c8;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 74.692652,118.91836 v 48.20131"
+         id="path4936" />
+      <path
+         style="fill:none;stroke:#0000c8;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 135.02225,118.91836 v 48.20131"
+         id="path4938" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.4666px;line-height:1.25;font-family:sans-serif;fill:#0000c8;fill-opacity:1;stroke:#0000c8;stroke-width:0.140177;stroke-opacity:1"
+       x="43.625031"
+       y="192.92578"
+       id="text4944"><tspan
+         id="tspan4942"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.4666px;font-family:System-ui;-inkscape-font-specification:System-ui;fill:#0000c8;fill-opacity:1;stroke:#0000c8;stroke-width:0.140177;stroke-opacity:1"
+         x="43.625031"
+         y="192.92578">AssetShizz</tspan></text>
+    <g
+       id="g5944"
+       transform="matrix(0.48875663,0,0,0.48875663,18.530867,157.25837)"
+       style="stroke:#000000;stroke-opacity:1">
+      <ellipse
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse5936"
+         cx="104.85745"
+         cy="118.91836"
+         rx="30.164799"
+         ry="12.568666" />
+      <ellipse
+         style="fill:none;stroke:#000000;stroke-width:3.09818;stroke-opacity:1"
+         id="ellipse5938"
+         cx="104.85745"
+         cy="167.11967"
+         rx="30.164799"
+         ry="12.568666" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 74.692652,118.91836 v 48.20131"
+         id="path5940" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 135.02225,118.91836 v 48.20131"
+         id="path5942" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.4666px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:#00007e;stroke-width:0.140177;stroke-opacity:1"
+       x="42.073338"
+       y="257.13239"
+       id="text5948"><tspan
+         id="tspan5946"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.4666px;font-family:System-ui;-inkscape-font-specification:System-ui;fill:#000000;fill-opacity:1;stroke:#00007e;stroke-width:0.140177;stroke-opacity:1"
+         x="42.073338"
+         y="257.13239">AssetShizz</tspan></text>
+    <g
+       id="g7488"
+       transform="matrix(0.22348414,0,0,0.22348414,137.72333,13.514142)"
+       style="fill:#ffffff;stroke:#010000;stroke-opacity:1">
+      <ellipse
+         style="fill:none;stroke:#010000;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse7480"
+         cx="104.85745"
+         cy="118.91836"
+         rx="30.164799"
+         ry="12.568666" />
+      <ellipse
+         style="fill:none;stroke:#010000;stroke-width:3.09818;stroke-opacity:1"
+         id="ellipse7482"
+         cx="104.85745"
+         cy="167.11967"
+         rx="30.164799"
+         ry="12.568666" />
+      <path
+         style="fill:#ffffff;stroke:#010000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 74.692652,118.91836 v 48.20131"
+         id="path7484" />
+      <path
+         style="fill:#ffffff;stroke:#010000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 135.02225,118.91836 v 48.20131"
+         id="path7486" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:13.3279px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:#00007e;stroke-width:0.178499;stroke-opacity:1"
+       x="124.37868"
+       y="84.88961"
+       id="text7492"><tspan
+         id="tspan7490"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3279px;font-family:System-ui;-inkscape-font-specification:System-ui;fill:#000000;fill-opacity:1;stroke:#00007e;stroke-width:0.178499;stroke-opacity:1"
+         x="124.37868"
+         y="84.88961">AssetShizz</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.01843;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path7571"
+       cx="161.35384"
+       cy="45.083885"
+       rx="37.2962"
+       ry="11.796703" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.01843;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse8009"
+       transform="rotate(-45.912351)"
+       ry="11.796703"
+       rx="37.2962"
+       cy="147.26411"
+       cx="79.880524" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.01843;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse8011"
+       transform="matrix(-0.69575798,-0.7182763,-0.7182763,0.69575798,0,0)"
+       ry="11.796703"
+       rx="37.2962"
+       cy="-84.529152"
+       cx="-144.64589" />
+    <g
+       id="g7488-3"
+       transform="matrix(0.78268393,0,0,0.78268393,498.43311,354.41131)"
+       style="fill:none;stroke:#010000;stroke-opacity:1">
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:3.83297;stroke-opacity:0"
+         id="rect23029"
+         width="106.75121"
+         height="78.400887"
+         x="-399.38126"
+         y="265.37146" />
+    </g>
+    <g
+       id="g8326"
+       transform="matrix(0.2832235,0,0,0.2832235,31.796433,-0.16605423)"
+       style="fill:#ffffff;stroke:#ffcc00;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <ellipse
+         style="fill:#ffcc00;fill-opacity:1;stroke:#030200;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse8318"
+         cx="95.192276"
+         cy="105.11096"
+         rx="30.164799"
+         ry="12.568666" />
+      <ellipse
+         style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse8320"
+         cx="95.192276"
+         cy="153.31229"
+         rx="30.162821"
+         ry="12.568666" />
+      <path
+         style="fill:#ffffff;stroke:#010100;stroke-width:5.47242;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.027475,105.11096 v 48.20131"
+         id="path8322" />
+      <path
+         style="fill:#ffffff;stroke:#000000;stroke-width:5.47242;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 125.35707,105.11096 v 48.20131"
+         id="path8324" />
+      <path
+         style="fill:#ffcc00;fill-opacity:1;stroke:#010100;stroke-width:1.43323;stroke-opacity:1"
+         d="m 577.13207,466.85671 v -12.03677 l 1.93354,1.02019 c 10.37057,5.47178 29.63929,5.43385 40.1601,-0.0791 l 1.73325,-0.90823 v 12.02537 12.02538 l -1.93354,-1.02019 c -10.20381,-5.3838 -29.22376,-5.4276 -39.72544,-0.0915 l -2.16791,1.10156 z"
+         id="path4655"
+         transform="matrix(1.249895,0,0,1.249895,-653.58405,-454.32629)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:13.3279px;line-height:1.25;font-family:sans-serif;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:0.178;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="23.928606"
+       y="70.803818"
+       id="text8330"><tspan
+         id="tspan8328"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3279px;font-family:System-ui;-inkscape-font-specification:System-ui;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:0.178;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="23.928606"
+         y="70.803818">AssetShizz</tspan></text>
+    <g
+       id="g882"
+       transform="matrix(0.2084302,0,0,0.2084302,245.38793,59.943005)"
+       style="fill:#ffffff;stroke:#ffcc00;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <ellipse
+         style="fill:none;stroke:#ffcc00;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse874"
+         cx="104.85745"
+         cy="118.91836"
+         rx="30.164799"
+         ry="12.568666" />
+      <ellipse
+         style="fill:none;stroke:#ffcc00;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse876"
+         cx="104.85745"
+         cy="167.11967"
+         rx="30.164799"
+         ry="12.568666" />
+      <path
+         style="fill:#ffffff;stroke:#ffcc00;stroke-width:5.47242;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 74.692652,118.91836 v 48.20131"
+         id="path878" />
+      <path
+         style="fill:#ffffff;stroke:#ffcc00;stroke-width:5.47242;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 135.02225,118.91836 v 48.20131"
+         id="path880" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14.1111px;line-height:2.85;font-family:sans-serif;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:0.178499;stroke-opacity:1"
+       x="229.88824"
+       y="134.57173"
+       id="text886"><tspan
+         id="tspan884"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:System-ui;-inkscape-font-specification:System-ui;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:0.178499;stroke-opacity:1"
+         x="229.88824"
+         y="134.57173">AssetShizz</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#141414;stroke-width:1.618;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse888"
+       cx="267.24338"
+       cy="89.752502"
+       rx="37.2962"
+       ry="11.796703" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#141414;stroke-width:1.618;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse890"
+       transform="rotate(-45.912351)"
+       ry="11.796703"
+       rx="37.2962"
+       cy="254.75253"
+       cx="121.81052" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#141414;stroke-width:1.618;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse892"
+       transform="matrix(-0.69575798,-0.7182763,-0.7182763,0.69575798,0,0)"
+       ry="11.796703"
+       rx="37.2962"
+       cy="-129.86049"
+       cx="-250.74466" />
+    <rect
+       style="fill:#ffcc00;fill-opacity:1;stroke:#cccccc;stroke-width:0.208009;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect872-7"
+       width="88.835625"
+       height="14.973425"
+       x="114.87581"
+       y="251.15724"
+       ry="1.909363" />
+    <g
+       id="g882-0"
+       transform="matrix(0.2084302,0,0,0.2084302,137.43817,189.27588)"
+       style="fill:#ffffff;stroke:#ffcc00;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <ellipse
+         style="fill:none;stroke:#ffcc00;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse874-9"
+         cx="104.85745"
+         cy="118.91836"
+         rx="30.164799"
+         ry="12.568666" />
+      <ellipse
+         style="fill:none;stroke:#ffcc00;stroke-width:5.47242;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse876-3"
+         cx="104.85745"
+         cy="167.11967"
+         rx="30.164799"
+         ry="12.568666" />
+      <path
+         style="fill:#ffffff;stroke:#ffcc00;stroke-width:5.47242;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 74.692652,118.91836 v 48.20131"
+         id="path878-6" />
+      <path
+         style="fill:#ffffff;stroke:#ffcc00;stroke-width:5.47242;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 135.02225,118.91836 v 48.20131"
+         id="path880-0" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14.1111px;line-height:2.85;font-family:sans-serif;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:0.178499;stroke-opacity:1"
+       x="121.93849"
+       y="263.9046"
+       id="text886-6"><tspan
+         id="tspan884-2"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:System-ui;-inkscape-font-specification:System-ui;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:0.178499;stroke-opacity:1"
+         x="121.93849"
+         y="263.9046">AssetShizz</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#141414;stroke-width:1.618;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse888-6"
+       cx="159.29362"
+       cy="219.08537"
+       rx="37.2962"
+       ry="11.796703" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#141414;stroke-width:1.618;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse890-1"
+       transform="rotate(-45.912351)"
+       ry="11.796703"
+       rx="37.2962"
+       cy="267.19913"
+       cx="-46.193134" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#141414;stroke-width:1.618;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse892-8"
+       transform="matrix(-0.69575798,-0.7182763,-0.7182763,0.69575798,0,0)"
+       ry="11.796703"
+       rx="37.2962"
+       cy="37.661652"
+       cx="-268.53448" />
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000001;stroke-width:1.82333;stroke-opacity:1"
+       id="path5241"
+       cx="58.757122"
+       cy="36.429714"
+       r="15.598115" />
+    <circle
+       style="fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.773667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path6202"
+       cx="71.675385"
+       cy="45.102409"
+       r="2.3031604" />
+    <circle
+       style="fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.773667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path6202-6"
+       cx="48.385262"
+       cy="24.805632"
+       r="2.3031604" />
+    <circle
+       style="fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.773667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path6202-6-7"
+       cx="58.757122"
+       cy="51.824131"
+       r="2.3031604" />
+  </g>
+</svg>

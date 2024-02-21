@@ -26,10 +26,10 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
 });
-
+ */
 
 Auth::routes();
 Route::get('/email/verify', function () {
@@ -52,8 +52,9 @@ Route::get('/email/verification-notification', function () {
     // Logic to resend the verification notification
 })->middleware(['throttle:6,1'])->name('verification.resend');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
     Route::get('/userinfo', [UserProfileController::class, 'index'])->name('getuserprofile');
     Route::put('/userinfo', [UserProfileController::class, 'update'])->name('userinfo');
     Route::resources([

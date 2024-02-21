@@ -19,7 +19,7 @@
                     <div class="card shadow border-0">
                         <div class="card-body py-5    px-md-5">
                             <div class="text-center">
-                                <img src="{{asset('resources\assets\Logo-FAY-Color.png')}}" style="width: 185px;" alt="logo">
+                                <img src="{{ asset('assets\icon\logo_icon_tab.png') }}" style="width: 185px;" alt="logo">
 
                             </div>
                             <form method="POST" action="{{ route('register') }}">

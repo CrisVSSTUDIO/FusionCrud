@@ -8,12 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#712cf9">
+    <link rel="icon" href="{{ asset('assets\icon\logo_icon_tab.png') }}">
+
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/js/app.js', 'resources/css/app.scss'])
 
-    <!-- Scripts -->
-    <!--     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
- -->
+
 </head>
 
 <body>
