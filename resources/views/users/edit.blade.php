@@ -2,22 +2,13 @@
 @section('crud-content')
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    Edit User
-                </div>
-                <div class="float-end">
-                    <a href="{{url()->previous()}}" class="btn btn-primary btn-sm">Retroceder</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('users.update', $user->id) }}" method="post">
+    <x-card title="Edit user">
+    <form action="{{ route('users.update', $user->id) }}" method="post">
                     @csrf
                     @method("PUT")
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nome do utilizador</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">User name</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $user->name }}">
                             @if ($errors->has('name'))
@@ -47,14 +38,14 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-start">Confirmar Password</label>
+                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-start">Confirm Password</label>
                         <div class="col-md-6">
                           <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Funções</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Available roles</label>
                         <div class="col-md-6">           
                             <select class="form-select @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
                                 @forelse ($roles as $role)
@@ -86,8 +77,7 @@
                     </div>
                     
                 </form>
-            </div>
-        </div>
-    </div>
+    </x-card>
+   
 </div>    
 @endsection

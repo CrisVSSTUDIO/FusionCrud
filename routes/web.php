@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -12,6 +13,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserProfileController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,25 @@ Route::get('/', function () {
 
 
 Auth::routes();
+Route::get('/email/verify', function () {
+
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', function (Request $request) {
+
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('resent', 'Verification link sent ');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/email/verification-notification', function () {
+    // Logic to resend the verification notification
+})->middleware(['throttle:6,1'])->name('verification.resend');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {

@@ -2,19 +2,7 @@
 @section('crud-content')
 
 <section class="category">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <nav aria-label="breadcrumb" class="rounded-3 p-3 mb-4 shadow-lg bg-white border-0">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Index</a></li>
-                        <li class="breadcrumb-item" aria-current="page"><a href="{{ url()->previous() }}">Categorias</a></li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-
+  
     <x-alert-success />
 
     <x-alert-error />

@@ -2,24 +2,6 @@
 @section('crud-content')
 
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <nav aria-label="breadcrumb" class="rounded-3 p-3 mb-4 shadow-lg bg-white border-0">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url()->previous() }}">
-
-                            {{ $category_slug }}
-
-                        </a></li>
-                    <li class="breadcrumb-item " aria-current="page">{{ $asset->name ?? 'No name' }}</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</div>
-
 <x-alert-success />
 
 <x-alert-error />

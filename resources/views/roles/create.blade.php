@@ -1,24 +1,13 @@
 @extends('home')
 @section('crud-content')
-
 <div class="row justify-content-center">
     <div class="col-md-8">
-
-        <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    Adicionar nova função
-                </div>
-                <div class="float-end">
-                <a href="{{url()->previous()}}" class="btn btn-primary btn-sm">Retroceder</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('roles.store') }}" method="post">
+    <x-card title="Create new role">
+    <form action="{{ route('roles.store') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nome</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Role name</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @if ($errors->has('name'))
@@ -28,7 +17,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="permissions" class="col-md-4 col-form-label text-md-end text-start">Permissões</label>
+                        <label for="permissions" class="col-md-4 col-form-label text-md-end text-start">Permissions</label>
                         <div class="col-md-6">           
                             <select class="form-select @error('permissions') is-invalid @enderror" multiple aria-label="Permissions" id="permissions" name="permissions[]" style="height: 210px;">
                                 @forelse ($permissions as $permission)
@@ -50,8 +39,8 @@
                     </div>
                     
                 </form>
-            </div>
-        </div>
+    </x-card>
+     
     </div>    
 </div>
     

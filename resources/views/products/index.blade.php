@@ -3,16 +3,15 @@
     <x-alert-success />
 
     <x-alert-error />
-    <div class="card">
-        <div class="card-header">Gerir Assets</div>
-        <div class="card-body">
+    <x-card title="Manage products">
+
             <table id="productsTable" class="table">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Descrição</th>
+                        <th>Asset name</th>
+                        <th>Description</th>
                         <th>Slug</th>
-                        <th>Categoria</th>
+                        <th>Belongs to category</th>
 
                     </tr>
                 </thead>
@@ -31,13 +30,11 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-    </div>
-
-    </div>
+    </x-card>
 
     <script type="module">
         $('#productsTable').DataTable({
+            responsive:true,
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'excel', 'pdf', 'csv'

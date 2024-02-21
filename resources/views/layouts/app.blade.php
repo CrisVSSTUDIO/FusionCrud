@@ -21,7 +21,6 @@
         <main>
             @yield('content')
             <x-dark-toggle />
-
         </main>
     </div>
 </body>
