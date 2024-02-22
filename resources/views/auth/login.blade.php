@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="card-body p-md-4 p-sm-4 mx-md-4 shadow">
+                        <div class="card-body p-md-4 p-sm-4 mx-md-4 shadow border-0">
 
                             <div class="text-center">
                                 <img src="{{ asset('assets\icon\logo_icon_tab.png') }}" style="width: 185px;" alt="logo">

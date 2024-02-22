@@ -18,7 +18,10 @@
 
 <body>
     <div id="app">
-        <main>
+        <main class="py-4">
+            <x-alert-success/>
+            <x-alert-error/>
+
             @yield('content')
             <x-dark-toggle />
         </main>

@@ -9,9 +9,9 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
 </div>
-@endif
 <script>
     setTimeout(function() {
         document.getElementById("div-400").style.display = "none";
     }, 10000)
 </script>
+@endif
