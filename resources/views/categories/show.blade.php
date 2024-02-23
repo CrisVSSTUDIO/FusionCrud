@@ -3,9 +3,6 @@
 
 <section class="category">
   
-    <x-alert-success />
-
-    <x-alert-error />
 
 
 

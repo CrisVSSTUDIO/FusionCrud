@@ -1,6 +1,5 @@
 @extends('home')
 @section('crud-content')
-<section class="trashed">
     <!-- Modal restaurar-->
     <div class="modal fade" id="restoreModal" tabindex="-1" aria-labelledby="restoreLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -37,9 +36,10 @@
         </div>
     </div>
 
+    <x-card title="Trashed items">
 
     <!-- Pills navs -->
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <ul class="nav nav-pills " id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-asset-tab" data-bs-toggle="pill" data-bs-target="#pills-asset" type="button" role="tab" aria-controls="pills-asset" aria-selected="true">Assets</button>
         </li>
@@ -121,11 +121,10 @@
                 </table>
             </div>
         </div>
-
     </div>
+</x-card>      
 
 
-</section>
 <script type="module">
     const exampleModal = document.getElementById('restoreModal')
     const deleteModal = document.getElementById('deleteModal')

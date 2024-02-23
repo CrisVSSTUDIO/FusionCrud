@@ -1,8 +1,6 @@
 @extends('home')
 @section('crud-content')
-    <x-alert-success />
 
-    <x-alert-error />
     <x-card title="Manage products">
 
             <table id="productsTable" class="table">
@@ -12,6 +10,8 @@
                         <th>Description</th>
                         <th>Slug</th>
                         <th>Belongs to category</th>
+                        <th>Actions</th>
+
 
                     </tr>
                 </thead>

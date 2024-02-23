@@ -1,7 +1,7 @@
 @extends('home')
 @section('crud-content')
-    <div class="row ">
-        <div class="col-md-8">
+<div class="row justify-content-center">
+    <div class="col-md-8">
             <x-card title="Create products">
 
                 <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">

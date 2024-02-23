@@ -1,11 +1,7 @@
 @extends('home')
 @section('crud-content')
-    <div class="container py-4">
-        <x-alert-success />
-
-        <x-alert-error />
-        <div class="row">
-            <div class="col-md-8">
+<div class="row justify-content-center">
+    <div class="col-md-8">
                 <x-card title="Create category">
                     <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -24,4 +20,5 @@
                     </form>
                 </x-card>
             </div>
+</div>
         @endsection

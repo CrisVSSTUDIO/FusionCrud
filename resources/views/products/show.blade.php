@@ -2,9 +2,6 @@
 @section('crud-content')
 
 
-<x-alert-success />
-
-<x-alert-error />
 @php $filextension=pathinfo($asset->upload,PATHINFO_EXTENSION );
 @endphp
 
