@@ -17,7 +17,7 @@
 
 <div class="card m-2 shadow border-0">
     <h5 class="card-header text-center">{{ $title }}</h5>
-    <div class="card-body">
+    <div class="card-body ">
         {{ $slot }}
     </div>
 </div>

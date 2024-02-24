@@ -27,7 +27,6 @@
                                 @csrf
                                 @method('DELETE')
         
-                                <a href="{{ route('categories.show', $category) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i>See category</a>
                                 @can('edit-category')
                                 <a href="{{ route('categories.edit', $category) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
                                 @endcan

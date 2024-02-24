@@ -1,45 +1,37 @@
 @extends('home')
 @section('crud-content')
     <script src="{{ asset('assets\js\chart.js') }}"></script>
-    <x-alert-success />
 
-    <x-alert-error />
     <div class="container py-4 ">
         <div class="row">
             <div class="col-xl-6">
-                <div class="card  border-0 shadow mt-2 p-2">
-                    <span class="text-center p-2 ">Número de assets por categorias</span>
+                <x-card title="Number of products per category">
+
 
                     <canvas id="myChart"></canvas>
-                </div>
-
+                </x-card>
             </div>
             <div class="col-xl-6">
-                <div class="card  border-0 shadow p-3 mt-2">
-                    <span class="text-center p-2">Evolução do número de assets por ano </span>
+                <x-card title="Trend of the evolution of the number of products per year">
                     <canvas id="perYearEvolution"></canvas>
-                </div>
-
+                </x-card>
             </div>
         </div>
         <div class="row">
 
             <div class="col-xl-6">
-                <div class="card  border-0 shadow p-3 mt-2">
-                    <span class="text-center p-2">
-                        <p class="text-muted">Média de
-                        <p><mark>{{ $averageProductsPerDay }}</mark> {{ $averageProductsPerDay > 1 ? 'assets' : 'asset' }}
-                            criado por dia
-                        </p>
-                </div>
+                <x-card title="Average of ">
+                    <p><mark>{{ $averageProductsPerDay }}</mark> {{ $averageProductsPerDay > 1 ? 'products' : 'product' }}
+                        created per day
+                    </p>
+                </x-card>
             </div>
             <div class="col-xl-6">
-                <div class="card  border-0 shadow p-3 mt-2">
-                    <span class="text-center p-2">
-                        <p class="text-muted">Algoritmo apriori
-                        <p>{{ $apriori }}
-                        </p>
-                </div>
+                <x-card title="Apriori algorithm">
+
+                    <p>{{ $apriori }}
+                    </p>
+                </x-card>
             </div>
 
         </div>
@@ -78,7 +70,7 @@
                 labels: xValues,
                 datasets: [{
                     data: yValues,
-                    label: 'Número de assets por categoria',
+                    label: 'Number of products per category',
                     backgroundColor: backgroundColors
 
                 }],
@@ -99,7 +91,7 @@
 
                 datasets: [{
                     data: xPerYear,
-                    label: 'Evolução do número de assets por ano com Regressão Linear',
+                    label: 'Trend of the evolution of the number of products per year',
                     backgroundColor: '#3b71ca'
                 }],
             },
