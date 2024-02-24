@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('products.create', [
-            'categories' => Category::orderBy('id','DESC')->get()
+            'categories' => Category::select('id','category_name')->orderBy('id','DESC')->get()
         ]);
     }
 
@@ -73,7 +73,8 @@ class ProductController extends Controller
         /*    $product = $product->load('tags');
        $alltags = Tag::select('id', 'tag_name')->get();
         $category_slug = DB::table('categories')->select('slug')->where('id', '=', $product->category_id)->value('slug'); */
-        return view('products.show', compact('product'));
+        $categories=Category::select('id','category_name')->orderBy('id','DESC')->get();
+        return view('products.show', compact('product','categories'));
     }
 
     /**

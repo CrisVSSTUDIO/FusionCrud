@@ -2,25 +2,25 @@
 @section('crud-content')
 
 
-@php $filextension=pathinfo($asset->upload,PATHINFO_EXTENSION );
+@php $filextension=pathinfo($product->upload,PATHINFO_EXTENSION );
 @endphp
 
 <div class="main-container">
     @if($filextension)
     @if ($filextension == 'csv')
     <!-- Modal  treino-->
-    <div class="modal fade" id="modalTrain{{ $asset->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalTrain{{ $product->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title">Treinar: <b>{{ $asset->name ?? 'Sem nome' }}</b></h5>
+                    <h5 class="modal-title">Treinar: <b>{{ $product->name ?? 'Sem nome' }}</b></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
                     <strong> Deseja submeter este ficheiro csv para ser treinado? </strong>
-                    <form method="POST" action="{{ route('statistics.post', $asset->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('statistics.post', $product->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group p-2 text-center">
                             <button type="submit" class="btn btn-primary ">Submeter</button>
@@ -33,17 +33,17 @@
     </div>
     @endif
     <!--Modal detalhes-->
-    <div class="modal fade" id="modal_detalhes{{ $asset->id }}" tabindex="-1" aria-labelledby="{{ $asset->id }}" aria-hidden="true">
+    <div class="modal fade" id="modal_detalhes{{ $product->id }}" tabindex="-1" aria-labelledby="{{ $product->id }}" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Detalhes: {{ $asset->name ?? 'Sem nome' }}</h5>
+                    <h5 class="modal-title">Detalhes: {{ $product->name ?? 'Sem nome' }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @switch($filextension)
                     @case($filextension == 'glb')
-                    <model-viewer alt="{{ $asset->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $asset->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" class="w-100 h-100">
+                    <model-viewer alt="{{ $product->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $product->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" class="w-100 h-100">
                     </model-viewer>
                     @break
 
@@ -55,7 +55,7 @@
                     @break
 
                     @case($filextension == 'pdf' || $filextension == 'webm')
-                    <iframe src="{{ asset('storage/' . $asset->upload) }}" title="{{ $asset->name ?? 'Sem nome' }}" class="text-center w-100 h-100"></iframe>
+                    <iframe src="{{ asset('storage/' . $product->upload) }}" title="{{ $product->name ?? 'Sem nome' }}" class="text-center w-100 h-100"></iframe>
                     @break
 
                     @case($filextension == 'csv')
@@ -65,7 +65,7 @@
                     @break
 
                     @default
-                    <img src="{{ asset('storage/' . $asset->upload) }}" alt="{{ $asset->name ?? 'Sem nome' }}" class="card-img-top" loading="lazy" />
+                    <img src="{{ asset('storage/' . $product->upload) }}" alt="{{ $product->name ?? 'Sem nome' }}" class="card-img-top" loading="lazy" />
                     @endswitch
                 </div>
 
@@ -74,43 +74,43 @@
     </div>
     @endif
     <!-- Modal editar -->
-    <div class="modal fade" id="modal_editar{{ $asset->id }}" tabindex="-1" aria-labelledby="{{ $asset->id }}" aria-hidden="true">
+    <div class="modal fade" id="modal_editar{{ $product->id }}" tabindex="-1" aria-labelledby="{{ $product->id }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar:
-                        <b>{{ $asset->name ?? ('Sem nome' ?? 'Nome indisponível') }}</b>
+                        <b>{{ $product->name ?? ('Sem nome' ?? 'Nome indisponível') }}</b>
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
-                    <form method="POST" action="{{ route('products.update', $asset) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('products.update', $product) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group p-2">
                             <label for="name">Nome</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $asset->name ?? 'Sem nome' }}">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $product->name ?? 'Sem nome' }}">
                         </div>
                         <div class="form-group p-2">
                             <label for="description">Descrição</label>
-                            <textarea class="form-control" id="description" name="description">{{ $asset->description ?? 'Sem descrição' }}</textarea>
+                            <textarea class="form-control" id="description" name="description">{{ $product->description ?? 'Sem descrição' }}</textarea>
                         </div>
                         <div class="form-group p-2">
                             <label for="category_id">Categoria</label>
                             <select class="form-select form-select-sm" id="category" name="category">
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ $category->id == $asset->category_id ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
                                     {{ $category->slug }}
                                 </option>
                                 @endforeach
                             </select>
                         </div>
-
-                        <div class="form-group p-2">
+{{-- 
+                       <div class="form-group p-2">
                             <label for="name">Tags do asset</label>
                             <select class="form-select" aria-label="Multiple select example" id="assetags" name="assetags[]" multiple>
-                                @foreach ($asset->tags as $currentag)
+                                @foreach ($product->tags as $currentag)
                                 <option value="{{ $currentag->id }}">{{ $currentag->tag_name ?? 'Sem tags' }}
                                 </option>
                                 @endforeach
@@ -123,7 +123,7 @@
                                 <option value="{{ $tag->id }}">{{ $tag->tag_name ?? 'Sem tags' }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group p-2">
 
@@ -140,18 +140,18 @@
     </div>
 
     <!-- Modal remover -->
-    <div class="modal fade" id="modal_remover{{ $asset->id }}" tabindex="-1" aria-labelledby="{{ $asset->id }}" aria-hidden="true">
+    <div class="modal fade" id="modal_remover{{ $product->id }}" tabindex="-1" aria-labelledby="{{ $product->id }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Remover: {{ $asset->name ?? 'Sem nome' }}</h5>
+                    <h5 class="modal-title">Remover: {{ $product->name ?? 'Sem nome' }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h5>Deseja mesmo <b class="text-danger">remover</b> <u>
-                            {{ $asset->name ?? 'Sem nome' }}?</u>
+                            {{ $product->name ?? 'Sem nome' }}?</u>
                     </h5>
-                    <form method="POST" action="{{ route('products.destroy', $asset) }}">
+                    <form method="POST" action="{{ route('products.destroy', $product) }}">
                         @csrf
                         @method('DELETE')
                 </div>
@@ -169,7 +169,7 @@
 
             @switch($filextension)
             @case($filextension == 'glb')
-            <model-viewer alt="{{ $asset->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $asset->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" class="w-100"></model-viewer>
+            <model-viewer alt="{{ $product->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $product->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" class="w-100"></model-viewer>
             @break
 
             @case($filextension == 'zip' || $filextension == 'rar')
@@ -180,7 +180,7 @@
             @break
 
             @case($filextension == 'pdf')
-            <iframe src="{{ asset('storage/' . $asset->upload) }}" title="{{ $asset->name ?? 'Sem nome' }}" class="text-center w-100 h-100"></iframe>
+            <iframe src="{{ asset('storage/' . $product->upload) }}" title="{{ $product->name ?? 'Sem nome' }}" class="text-center w-100 h-100"></iframe>
             @break
 
             @case($filextension == 'csv')
@@ -190,7 +190,7 @@
             @break
 
             @default
-            <img src="{{ asset('storage/' . $asset->upload) }}" alt="{{ $asset->name ?? 'Sem nome' }}" class="mycard-img-top" loading="lazy" />
+            <img src="{{ asset('storage/' . $product->upload) }}" alt="{{ $product->name ?? 'Sem nome' }}" class="mycard-img-top" loading="lazy" />
             @endswitch
         </div>
         @endif
@@ -198,23 +198,23 @@
 
         <div class="card-body-info">
 
-            <h3 class="card-title mt-2">{{ $asset->name ?? 'Sem nome' }}</h3>
-            <span class="card-description mt-2">{{ $asset->description ?? 'Sem descrição' }}</span>
+            <h3 class="card-title mt-2">{{ $product->name ?? 'Sem nome' }}</h3>
+            <span class="card-description mt-2">{{ $product->description ?? 'Sem descrição' }}</span>
             <p>
-                @foreach ($asset->tags as $tag)
+             {{--    @foreach ($product->tags as $tag)
                 <span class="badge rounded-pill text-bg-primary text-white">{{ $tag->tag_name ?? 'Sem tags' }}</span>
-                @endforeach
+                @endforeach --}}
             <div class="button-area">
 
 
-                <button class="btn btn-primary rounded-pill px-3 mt-4 " type="button" data-bs-toggle="collapse" data-bs-target="#f{{ $asset->id }}" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-primary rounded-pill px-3 mt-4 " type="button" data-bs-toggle="collapse" data-bs-target="#f{{ $product->id }}" aria-expanded="false" aria-controls="collapseExample">
                     Expandir ações <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 </p>
-                <div class="collapse" id="f{{ $asset->id }}">
+                <div class="collapse" id="f{{ $product->id }}">
                     @if($filextension)
                     @if ($filextension == 'zip' || $filextension == 'rar')
-                    <a href="{{ route('download', $asset->slug) }}" class="btn btn-primary  rounded-pill px-3  mt-2" title="Download" id="{{ $asset->name }}" onclick="downloadTest(this.id)">
+                    <a href="{{ route('download', $product->slug) }}" class="btn btn-primary  rounded-pill px-3  mt-2" title="Download" id="{{ $product->name }}" onclick="downloadTest(this.id)">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
                             <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
@@ -223,20 +223,20 @@
                         Download</a>
 
 
-                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $asset->id }}" title="Editar">
+                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}" title="Editar">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                         </svg>
                         Editar
                     </button>
-                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $asset->id }}" title="Remover">
+                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}" title="Remover">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                         </svg>
                         Remover
                     </button>
                     @elseif ($filextension == 'csv')
-                    <a href="{{ route('download', $asset->slug) }}" class="btn btn-primary  rounded-pill px-3  mt-2" title="Download" id="{{ $asset->name }}" onclick="downloadTest(this.id)">
+                    <a href="{{ route('download', $product->slug) }}" class="btn btn-primary  rounded-pill px-3  mt-2" title="Download" id="{{ $product->name }}" onclick="downloadTest(this.id)">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
                             <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
@@ -245,29 +245,29 @@
                         Download</a>
 
 
-                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $asset->id }}" title="Editar">
+                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}" title="Editar">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                         </svg>
                         Editar
                     </button>
-                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $asset->id }}" title="Remover">
+                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}" title="Remover">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                         </svg>
                         Remover
                     </button>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary rounded-pill px-3  text-white mt-2" data-bs-toggle="modal" data-bs-target="#modalTrain{{ $asset->id }}">
+                    <button type="button" class="btn btn-primary rounded-pill px-3  text-white mt-2" data-bs-toggle="modal" data-bs-target="#modalTrain{{ $product->id }}">
                         <i class="fa-solid fa-shapes"></i> Treinar modelo </button>
                     @else
-                    <button type="button" class="btn btn-info  rounded-pill px-3  text-white mt-2" data-bs-toggle="modal" data-bs-target="#modal_detalhes{{ $asset->id }}" title="Detalhes">
+                    <button type="button" class="btn btn-info  rounded-pill px-3  text-white mt-2" data-bs-toggle="modal" data-bs-target="#modal_detalhes{{ $product->id }}" title="Detalhes">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
                         </svg>
                         Tela cheia
                     </button>
-                    <a href="{{ route('download', $asset->slug) }}" class="btn btn-primary  rounded-pill px-3  mt-2" title="Download" id="{{ $asset->name }}" onclick="downloadTest(this.id)">
+                    <a href="{{ route('download', $product->slug) }}" class="btn btn-primary  rounded-pill px-3  mt-2" title="Download" id="{{ $product->name }}" onclick="downloadTest(this.id)">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
                             <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
@@ -276,13 +276,13 @@
                         Download</a>
 
 
-                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $asset->id }}" title="Editar">
+                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}" title="Editar">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                         </svg>
                         Editar
                     </button>
-                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $asset->id }}" title="Remover">
+                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}" title="Remover">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                         </svg>
@@ -291,13 +291,13 @@
 
                     @endif
                     @else
-                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $asset->id }}" title="Editar">
+                    <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}" title="Editar">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                         </svg>
                         Editar
                     </button>
-                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $asset->id }}" title="Remover">
+                    <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}" title="Remover">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                         </svg>
@@ -310,17 +310,17 @@
         </div>
     </div>
 </div>
-<div class="p-3 pb-md-4 mx-auto container-fluid">
+{{-- <div class="p-3 pb-md-4 mx-auto container-fluid">
     <h3 class="text-muted">Assets relacionados:</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 ">
-        @forelse($allOtherProducts as $asset)
-        @php $filextension=pathinfo($asset->upload,PATHINFO_EXTENSION ); @endphp
+        @forelse($allOtherProducts as $product)
+        @php $filextension=pathinfo($product->upload,PATHINFO_EXTENSION ); @endphp
 
         <div class="card mx-2 slide-right " style="width: 16rem;">
             @if($filextension)
             @switch($filextension)
             @case($filextension == 'glb')
-            <model-viewer alt="{{ $asset->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $asset->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" class="w-100"></model-viewer>
+            <model-viewer alt="{{ $product->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $product->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" class="w-100"></model-viewer>
             @break
 
             @case($filextension == 'zip' || $filextension == 'rar')
@@ -331,7 +331,7 @@
             @break
 
             @case($filextension == 'pdf' || $filextension == 'webm')
-            <iframe src="{{ asset('storage/' . $asset->upload) }}" title="{{ $asset->name ?? 'Sem nome' }}" class="w-100 h-100"></iframe>
+            <iframe src="{{ asset('storage/' . $product->upload) }}" title="{{ $product->name ?? 'Sem nome' }}" class="w-100 h-100"></iframe>
             @break
 
             @case($filextension == 'csv')
@@ -341,14 +341,14 @@
             @break
 
             @default
-            <img src="{{ asset('storage/' . $asset->upload) }}" alt="{{ $asset->name ?? 'Sem nome' }}" class="card-img-top" loading="lazy" />
+            <img src="{{ asset('storage/' . $product->upload) }}" alt="{{ $product->name ?? 'Sem nome' }}" class="card-img-top" loading="lazy" />
             @endswitch
             <hr>
             @endif
             <div class="card-body">
-                <h5 class="card-title">{{ $asset->name ?? 'Sem nome' }}</h5>
-                <p class="card-text">{{ $asset->description ?? 'Sem descrição' }}.</p>
-                <a class="btn btn-primary  rounded-pill   mt-2" href="{{ route('products.show', $asset) }}" role="button">Visualizar {{ $asset->name ?? 'Asset' }}</a>
+                <h5 class="card-title">{{ $product->name ?? 'Sem nome' }}</h5>
+                <p class="card-text">{{ $product->description ?? 'Sem descrição' }}.</p>
+                <a class="btn btn-primary  rounded-pill   mt-2" href="{{ route('products.show', $product) }}" role="button">Visualizar {{ $product->name ?? 'Asset' }}</a>
             </div>
         </div>
 
@@ -357,5 +357,5 @@
         @endforelse
 
     </div>
-</div>
+</div> --}}
 @endsection

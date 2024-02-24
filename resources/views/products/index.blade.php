@@ -24,7 +24,23 @@
                             <td>{{ $product->slug }}</td>
                             <td>{{ $product->category_name }}</td>
 
-
+                            <td>
+                                <form action="{{ route('products.destroy', $product) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+            
+                                    <a href="{{ route('products.show', $product) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i>See product</a>
+                                    @can('edit-product')
+                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
+                                    @endcan
+            
+                                    @can('delete-product')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');"><i class="bi bi-trash"></i> Delete</button>
+                                    @endcan
+                                    
+            
+                                </form>
+                            </td>
 
                         </tr>
                     @endforeach
@@ -37,7 +53,7 @@
             responsive:true,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'excel', 'pdf', 'csv'
+                'copy', 'pdf', 'csv'
             ]
         });
     </script>
