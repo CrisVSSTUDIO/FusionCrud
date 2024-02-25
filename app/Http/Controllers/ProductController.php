@@ -83,6 +83,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
+        $categories=Category::select('id','category_name')->orderBy('id','DESC')->get();
+
+        return view('products.edit',compact('product','categories'));
     }
 
     /**
