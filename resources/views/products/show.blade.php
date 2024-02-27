@@ -6,6 +6,9 @@
     height: fit-content;
     object-fit: cover;
 }
+model-viewer{
+    width:auto;
+}
 model-viewer.modal-fl-area-view {
     width: 100%;
     height: 100%;
@@ -210,7 +213,7 @@ iframe.modal-fl-area-pdf {
                             @case($filextension == 'glb')
                                 <model-viewer alt="{{ $product->name ?? 'Sem nome' }}"
                                     src="{{ asset('storage/' . $product->upload) }}" ar camera-controls touch-action="pan-y"
-                                    loading="lazy" class="card-img-top"></model-viewer>
+                                    loading="lazy" ></model-viewer>
                             @break
 
                             @case($filextension == 'zip' || $filextension == 'rar')
@@ -422,7 +425,7 @@ iframe.modal-fl-area-pdf {
             @if ($filextension)
             @switch($filextension)
             @case($filextension == 'glb')
-            <model-viewer alt="{{ $product->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $product->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" class="card-img-top"></model-viewer>
+            <model-viewer alt="{{ $product->name ?? 'Sem nome' }}" src="{{ asset('storage/' . $product->upload) }}" ar camera-controls touch-action="pan-y" loading="lazy" ></model-viewer>
             @break
 
             @case($filextension == 'zip' || $filextension == 'rar')
