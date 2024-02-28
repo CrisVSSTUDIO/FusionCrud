@@ -15,7 +15,7 @@
                         <img src="{{asset('resources\assets\user.jpg')}}" alt="{{ Auth::user()->name }}" width="auto" height="40" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small show">
-                        <li><a class="dropdown-item" href="{{ url('/home') }}">Restrict area</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/home') }}">Restricted area</a></li>
                         <li><a class="dropdown-item" href="{{ route('getuserinfo') }}">Profile</a></li>
                         @can('Super Admin')
                         <li><a class="dropdown-item" href="{{ route('management') }}">Admin Dashboard</a></li>
