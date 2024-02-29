@@ -2,9 +2,9 @@
 @section('crud-content')
 <style>
 .card-img-top {
-    width: 100%;
-    height: fit-content;
-    object-fit: cover;
+    width: fit-content;
+    height: 32vw;
+    
 }
 model-viewer{
     width:auto;
