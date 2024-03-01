@@ -32,6 +32,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
  */
 
 Auth::routes();
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/email/verify', function () {
 
     return view('auth.verify');
@@ -53,7 +55,6 @@ Route::get('/email/verification-notification', function () {
 })->middleware(['throttle:6,1'])->name('verification.resend');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/userinfo', [UserProfileController::class, 'index'])->name('getuserprofile');
     Route::put('/userinfo', [UserProfileController::class, 'update'])->name('userinfo');
