@@ -25,7 +25,8 @@ class PermissionSeeder extends Seeder
             'delete-product',
             'create-category',
             'edit-category',
-            'delete-category'
+            'delete-category',
+            'see-invitations'
         ];
 
         // Looping and Inserting Array's Permissions into Permission Table

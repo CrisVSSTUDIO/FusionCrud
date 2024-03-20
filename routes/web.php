@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TrashedController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -33,7 +35,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
- 
+
 Route::get('/email/verify', function () {
 
     return view('auth.verify');
@@ -53,17 +55,24 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/email/verification-notification', function () {
     // Logic to resend the verification notification
 })->middleware(['throttle:6,1'])->name('verification.resend');
+Route::get('register/request', [RegisterController::class, 'requestInvitation'])->name('requestInvitation');
+Route::post('/invitation', [InvitationController::class, 'store'])->name('unlock');
+
+
 
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/userinfo', [UserProfileController::class, 'index'])->name('getuserprofile');
     Route::put('/userinfo', [UserProfileController::class, 'update'])->name('userinfo');
+    Route::get('allInvitations', [InvitationController::class, 'index'])->name('allInvitations');
+
     Route::resources([
         'roles' => RoleController::class,
         'users' => UserController::class,
         'products' => ProductController::class,
         'categories' => CategoryController::class,
-        'permission' => PermissionController::class
+        'permission' => PermissionController::class,
+       
     ]);
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
     Route::prefix('products')->group(function () {

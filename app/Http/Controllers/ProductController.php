@@ -50,7 +50,6 @@ class ProductController extends Controller
     {
         //
 
-        $request->validated();
         $path = $request->file('upload')->storeAs('public', time() . '_' . $request->file('upload')->getClientOriginalName());
         $product = new Product([
             'name' => $request->input('name'),

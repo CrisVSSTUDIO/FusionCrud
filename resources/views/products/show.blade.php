@@ -87,8 +87,8 @@ iframe.modal-fl-area-pdf {
                                 @break
 
                                 @case($filextension == 'pdf' || $filextension == 'webm')
-                                    <iframe src="{{ asset('storage/' . $product->upload) }}"
-                                        title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top"></iframe>
+                                    <link rel="import"  src="{{ asset('storage/' . $product->upload) }}"
+                                        title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top">
                                 @break
 
                                 @case($filextension == 'csv')
@@ -227,8 +227,8 @@ iframe.modal-fl-area-pdf {
                             @break
 
                             @case($filextension == 'pdf')
-                                <iframe src="{{ asset('storage/' . $product->upload) }}"
-                                    title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top"></iframe>
+                                <link rel="import"  src="{{ asset('storage/' . $product->upload) }}"
+                                    title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top">
                             @break
 
                             @case($filextension == 'csv')
@@ -436,7 +436,7 @@ iframe.modal-fl-area-pdf {
             @break
 
             @case($filextension == 'pdf' || $filextension == 'webm')
-            <iframe src="{{ asset('storage/' . $product->upload) }}" title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top h-100"></iframe>
+            <link rel="import"  src="{{ asset('storage/' . $product->upload) }}" title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top h-100">
             @break
 
             @case($filextension == 'csv')

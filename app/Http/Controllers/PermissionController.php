@@ -11,13 +11,13 @@ class PermissionController extends Controller
      * Display a listing of the resource.
      */
     public function __construct()
-{
-    $this->middleware(['role:Super Admin']);
-}
+    {
+        $this->middleware(['role:Super Admin']);
+    }
     public function index()
     {
         //estudar laravel spatie middlewares
-/* 
+        /* 
      
         if (  !Auth::user()->hasRole('Super Admin')) {
 
