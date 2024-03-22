@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('category_name');
             $table->string('slug');
             $table->text('category_description')->nullable();
-         
             $table->index(['created_at', 'updated_at']);
             $table->timestamps();
             $table->softDeletes();
