@@ -43,7 +43,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 Route::post('/email/verification-notification', function (Request $request) {
 
@@ -60,7 +60,7 @@ Route::post('/invitation', [InvitationController::class, 'store'])->name('unlock
 
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
 
     Route::get('/userinfo', [UserProfileController::class, 'index'])->name('getuserprofile');
     Route::put('/userinfo', [UserProfileController::class, 'update'])->name('userinfo');
