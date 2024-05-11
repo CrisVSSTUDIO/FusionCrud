@@ -1,11 +1,7 @@
 @extends('home')
 @section('crud-content')
 <style>
-.card-img-top {
-    width: fit-content;
-    height: 32vw;
-    
-}
+
 model-viewer{
     width:auto;
 }

@@ -15,8 +15,8 @@
     </div>
 </div> -->
 
-<div class="card m-2 text-center shadow border-0">
-    <h5 class="card-header  text-white" style="background-color:#0369a1; ">{{ $title }}</h5>
+<div class="card m-2 shadow border-0">
+    <h5 class="card-header  textr-center text-white" style="background-color:#0369a1; ">{{ $title }}</h5>
     <div class="card-body "> 
         {{ $slot }}
     </div>
