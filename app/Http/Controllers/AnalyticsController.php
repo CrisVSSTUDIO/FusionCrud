@@ -3,27 +3,34 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Product;
+use App\Models\Category;
+use Phpml\Metric\Accuracy;
 use Illuminate\Http\Request;
 use Phpml\Clustering\DBSCAN;
 use Phpml\Association\Apriori;
+use Phpml\Dataset\ArrayDataset;
 use Illuminate\Support\Facades\DB;
 use Phpml\Regression\LeastSquares;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Phpml\Classification\NaiveBayes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+use Phpml\CrossValidation\StratifiedRandomSplit;
 
 class AnalyticsController extends Controller
 {
     //
     public function index()
     {
-       $averageProductsPerDay = round($this->averageAssets());
+        $averageProductsPerDay = round($this->averageAssets());
+        $predictions = $this->naiveBayes();
         //list($isVirtual, $isNotVirtual) = $this->virtualCategories();
         list($product_name, $product_count) = $this->assetPerCategory();
         list($perYear, $yearCount) = $this->assetsPerDate();
         list($apriori) = $this->patterns();
-        return view('analytics.index', ['created_at' => json_encode($product_name), 'rowcount' => json_encode($product_count), 'averageProductsPerDay' => $averageProductsPerDay, 'perYear' => json_encode($perYear), 'yearCount' => json_encode($yearCount), 'apriori' => json_encode($apriori)]);
+        return view('analytics.index', ['created_at' => json_encode($product_name), 'rowcount' => json_encode($product_count), 'averageProductsPerDay' => $averageProductsPerDay, 'perYear' => json_encode($perYear), 'yearCount' => json_encode($yearCount), 'apriori' => json_encode($apriori),'predictions' => json_encode($predictions)]);
     }
     public function assetPerCategory()
     {
@@ -32,7 +39,7 @@ class AnalyticsController extends Controller
         $products = DB::table('products')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('categories.category_name', DB::raw('count(*) as total'))
-        
+
             ->groupBy('categories.category_name')
             ->take(5000)->get();
         if (count($products)) {
@@ -124,17 +131,50 @@ class AnalyticsController extends Controller
             return array($associator->apriori());
         }
     }
-    public function DBSCAN()
+    public function naiveBayes()
     {
-        $samples = [];
-        $dbscan = new DBSCAN($epsilon = 2, $minSamples = 3);
-        $ids = Product::select('id')->pluck('id');
-        if (count($ids)) {
-            foreach ($ids as $id) {
-                $filextension[] = $id;
-            }
-            array_push($samples, $filextension);
-            dd($dbscan->cluster($samples));
+        $assetsUpload = Product::select('upload')->whereNull('deleted_at')
+            ->pluck('upload')->toArray();
+
+        $fileTypes = [];
+        $fileSizes = [];
+
+        foreach ($assetsUpload as $upload) {
+            array_push($fileTypes, Storage::mimeType($upload));
+            array_push($fileSizes, Storage::size($upload));
         }
+        // Check if the arrays are not empty
+        if (empty($fileTypes) || empty($fileSizes)) {
+            // Log a message instead of throwing an exception
+            dd("No files");
+        }
+
+        // Prepare the dataset
+        $samples = [];
+        foreach ($fileSizes as $size) {
+            $samples[] = [$size]; // Each sample should be an array
+        }
+
+        // Create the dataset
+        $dataset = new ArrayDataset($samples, $fileTypes);
+
+        // Split the dataset
+        $split = new StratifiedRandomSplit($dataset, 0.5); // 20% for testing
+        // Create and Test the Naive Bayes classifier
+        $classifier = new NaiveBayes();;
+        $classifier->train($split->getTrainSamples(), $split->getTrainLabels());
+
+        // Predict file types for test samples
+        $predictions = $classifier->predict($samples);
+        $accuracy = Accuracy::score(
+            $fileTypes,
+            $predictions
+        );
+
+
+        // Return predictions
+        return ($predictions);
+        /*         return array($predictions, $accuracy);
+ */
     }
 }
