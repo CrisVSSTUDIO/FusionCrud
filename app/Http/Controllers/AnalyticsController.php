@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Phpml\Classification\NaiveBayes;
+use Phpml\Metric\ClassificationReport;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use Phpml\CrossValidation\StratifiedRandomSplit;
