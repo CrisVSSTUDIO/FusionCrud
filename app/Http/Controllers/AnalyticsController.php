@@ -25,15 +25,15 @@ class AnalyticsController extends Controller
     //
     public function index()
     {
-        $averageProductsPerDay = round($this->averageAssets());
+        $averageProductsPerDay = round($this->averageProducts());
         $predictions = $this->naiveBayes();
         //list($isVirtual, $isNotVirtual) = $this->virtualCategories();
-        list($product_name, $product_count) = $this->assetPerCategory();
-        list($perYear, $yearCount) = $this->assetsPerDate();
+        list($product_name, $product_count) = $this->ProductPerCategory();
+        list($perYear, $yearCount) = $this->ProductsPerDate();
         list($apriori) = $this->patterns();
         return view('analytics.index', ['created_at' => json_encode($product_name), 'rowcount' => json_encode($product_count), 'averageProductsPerDay' => $averageProductsPerDay, 'perYear' => json_encode($perYear), 'yearCount' => json_encode($yearCount), 'apriori' => json_encode($apriori), 'predictions' => json_encode($predictions)]);
     }
-    public function assetPerCategory()
+    public function ProductPerCategory()
     {
         //this function here, does a "traditional" sql query to get the date and counting the number of elements found, grouping them by date and fetching the data in an efficient way.
         //it will  be used for statistics
@@ -52,7 +52,7 @@ class AnalyticsController extends Controller
         }
     }
 
-    public function assetsPerDate()
+    public function ProductsPerDate()
     {
         try {
             $prevNextFiveYears = Date('Y') + 5;
@@ -80,7 +80,7 @@ class AnalyticsController extends Controller
         }
     }
 
-    public function averageAssets()
+    public function averageProducts()
     {
         $productsCount = Product::selectRaw('DATE(created_at) as date, COUNT(*) as count')
             ->groupBy('date')
@@ -135,7 +135,7 @@ class AnalyticsController extends Controller
     public function naiveBayes()
     {
         // Retrieve file types and sizes from the database
-        $files = Asset::select('id', 'filetype', 'filesize')
+        $files = Product::select('id', 'filetype', 'filesize')
             ->where('user_id', Auth::user()->id)
             ->whereNull('deleted_at')
             ->orderBy('filesize')
@@ -171,7 +171,7 @@ class AnalyticsController extends Controller
 
         // Update database records with predictions
         foreach ($predictions as $index => $prediction) {
-            DB::table('assets')
+            DB::table('Products')
                 ->where('id', $files[$index]->id)
                 ->update(['filetype_prediction' => $prediction]);
         }
@@ -183,7 +183,7 @@ class AnalyticsController extends Controller
         $samples = [];
         $labels = [];
         // Retrieve file types and sizes from the database
-        $files = Asset::select('filesize', 'filetype')
+        $files = Product::select('filesize', 'filetype')
             ->where('user_id', Auth::user()->id)
             ->whereNull('deleted_at')
             ->orderBy('filesize') // Corrected orderby clause
@@ -191,7 +191,7 @@ class AnalyticsController extends Controller
         $samples = [];
         $labels = [];
         // Retrieve file types and sizes from the database
-        $files = Asset::select('filesize', 'filetype')
+        $files = Product::select('filesize', 'filetype')
             ->where('user_id', Auth::user()->id)
             ->whereNull('deleted_at')
             ->orderBy('filesize')
