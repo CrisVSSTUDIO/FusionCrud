@@ -12,6 +12,7 @@ use Phpml\Association\Apriori;
 use Phpml\Dataset\ArrayDataset;
 use Illuminate\Support\Facades\DB;
 use Phpml\Regression\LeastSquares;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Phpml\Classification\NaiveBayes;
@@ -30,7 +31,7 @@ class AnalyticsController extends Controller
         list($product_name, $product_count) = $this->assetPerCategory();
         list($perYear, $yearCount) = $this->assetsPerDate();
         list($apriori) = $this->patterns();
-        return view('analytics.index', ['created_at' => json_encode($product_name), 'rowcount' => json_encode($product_count), 'averageProductsPerDay' => $averageProductsPerDay, 'perYear' => json_encode($perYear), 'yearCount' => json_encode($yearCount), 'apriori' => json_encode($apriori),'predictions' => json_encode($predictions)]);
+        return view('analytics.index', ['created_at' => json_encode($product_name), 'rowcount' => json_encode($product_count), 'averageProductsPerDay' => $averageProductsPerDay, 'perYear' => json_encode($perYear), 'yearCount' => json_encode($yearCount), 'apriori' => json_encode($apriori), 'predictions' => json_encode($predictions)]);
     }
     public function assetPerCategory()
     {
@@ -133,48 +134,104 @@ class AnalyticsController extends Controller
     }
     public function naiveBayes()
     {
-        $assetsUpload = Product::select('upload')->whereNull('deleted_at')
-            ->pluck('upload')->toArray();
+        // Retrieve file types and sizes from the database
+        $files = Asset::select('id', 'filetype', 'filesize')
+            ->where('user_id', Auth::user()->id)
+            ->whereNull('deleted_at')
+            ->orderBy('filesize')
+            ->take(500)
+            ->get();
 
-        $fileTypes = [];
-        $fileSizes = [];
-
-        foreach ($assetsUpload as $upload) {
-            array_push($fileTypes, Storage::mimeType($upload));
-            array_push($fileSizes, Storage::size($upload));
-        }
-        // Check if the arrays are not empty
-        if (empty($fileTypes) || empty($fileSizes)) {
-            // Log a message instead of throwing an exception
-            dd("No files");
+        // Check if files collection is not empty
+        if ($files->isEmpty()) {
+            Log::error("No files found for user with ID: " . Auth::user()->id);
+            return;
         }
 
         // Prepare the dataset
-        $samples = [];
-        foreach ($fileSizes as $size) {
-            $samples[] = [$size]; // Each sample should be an array
-        }
+        $samples = $files->pluck('filesize')->map(function ($size) {
+            return [$size];
+        })->all();
+        $labels = $files->pluck('filetype')->all();
 
         // Create the dataset
-        $dataset = new ArrayDataset($samples, $fileTypes);
+        $dataset = new ArrayDataset($samples, $labels);
 
         // Split the dataset
-        $split = new StratifiedRandomSplit($dataset, 0.5); // 20% for testing
+        $split = new StratifiedRandomSplit($dataset);
+
         // Create and Test the Naive Bayes classifier
-        $classifier = new NaiveBayes();;
+        $classifier = new NaiveBayes();
         $classifier->train($split->getTrainSamples(), $split->getTrainLabels());
 
         // Predict file types for test samples
         $predictions = $classifier->predict($samples);
-        $accuracy = Accuracy::score(
-            $fileTypes,
-            $predictions
-        );
+        $classificationRport = new ClassificationReport($labels, $predictions);
+        $accuracy = Accuracy::score($labels, $predictions);
 
+        // Update database records with predictions
+        foreach ($predictions as $index => $prediction) {
+            DB::table('assets')
+                ->where('id', $files[$index]->id)
+                ->update(['filetype_prediction' => $prediction]);
+        }
+        // Return accuracy and predictions
+        return ['accuracy' => $accuracy, 'predictions' => $predictions];
+    }
+    public function kMeans()
+    {
+        $samples = [];
+        $labels = [];
+        // Retrieve file types and sizes from the database
+        $files = Asset::select('filesize', 'filetype')
+            ->where('user_id', Auth::user()->id)
+            ->whereNull('deleted_at')
+            ->orderBy('filesize') // Corrected orderby clause
+            ->get();
+        $samples = [];
+        $labels = [];
+        // Retrieve file types and sizes from the database
+        $files = Asset::select('filesize', 'filetype')
+            ->where('user_id', Auth::user()->id)
+            ->whereNull('deleted_at')
+            ->orderBy('filesize')
+            ->get();
 
-        // Return predictions
-        return ($predictions);
-        /*         return array($predictions, $accuracy);
- */
+        // Check if files collection is not empty
+        if ($files->isEmpty()) {
+            Log::error("No files found for user with ID: " . Auth::user()->id);
+            return;
+        }
+
+        // Prepare the data for clustering
+        foreach ($files as $file) {
+            $samples[] = [$file->filesize]; // Each sample should be an array of features
+            $labels[] = $file->filetype;
+        }
+
+        $kmeans = new KMeans(2); // Specify the number of clusters
+        $clusters = $kmeans->cluster($samples);
+
+        // Combine the clusters with labels
+        $labeledClusters = [];
+        foreach ($clusters as $clusterIndex => $cluster) {
+            foreach ($cluster as $sampleIndex => $sample) {
+                $labeledClusters[$labels[$sampleIndex]][] = $sample[0];
+            }
+        }
+        return $labeledClusters;
+        // Check if files collection is not empty
+        if ($files->isEmpty()) {
+            Log::error("No files found for user with ID: " . Auth::user()->id);
+            return;
+        }
+        foreach ($files as $file) {
+            array_push($labels, $file->filetype);
+            array_push($samples, $file->filesize);
+        }
+        $res = array_fill_keys(array_values($labels), $samples);
+        $kmeans = new DBSCAN($epsilon = 2, $minSamples = 3);;
+        $potato = $kmeans->cluster($res);
+        dd($potato);
     }
 }
