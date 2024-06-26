@@ -137,7 +137,6 @@ class AnalyticsController extends Controller
     {
         // Retrieve file types and sizes from the database
         $files = Product::select('id', 'filetype', 'filesize')
-            ->where('user_id', Auth::user()->id)
             ->whereNull('deleted_at')
             ->orderBy('filesize')
             ->take(500)
@@ -145,7 +144,6 @@ class AnalyticsController extends Controller
 
         // Check if files collection is not empty
         if ($files->isEmpty()) {
-            Log::error("No files found for user with ID: " . Auth::user()->id);
             return;
         }
 

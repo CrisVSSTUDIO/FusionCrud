@@ -14,7 +14,10 @@ class Product extends Model
         'description',
         'upload',
         'category_id',
-        'slug'
+        'slug',
+        'filetype',
+        'filesize',
+        'filetype_prediction'
     ];
 
     public function category()

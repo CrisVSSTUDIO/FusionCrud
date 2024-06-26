@@ -14,11 +14,11 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-       $this->middleware('auth');
-       $this->middleware('permission:create-product|edit-product|delete-product', ['only' => ['index','show']]);
-       $this->middleware('permission:create-product', ['only' => ['create','store']]);
-       $this->middleware('permission:edit-product', ['only' => ['edit','update']]);
-       $this->middleware('permission:delete-product', ['only' => ['destroy']]);
+        $this->middleware('auth');
+        $this->middleware('permission:create-product|edit-product|delete-product', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create-product', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-product', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-product', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('products.create', [
-            'categories' => Category::select('id','category_name')->orderBy('id','DESC')->get()
+            'categories' => Category::select('id', 'category_name')->orderBy('id', 'DESC')->get()
         ]);
     }
 
@@ -55,6 +55,8 @@ class ProductController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'slug' => Str::slug($request->get('name')),
+            'filesize' => round($request->file('upload')->getSize() / 1048576, 2), // Convert bytes to megabytes
+            'filetype' => $request->file('upload')->extension(),
             'upload' => $path,
             'category_id' => $request->input('category')
 
@@ -72,8 +74,8 @@ class ProductController extends Controller
         /*    $product = $product->load('tags');
        $alltags = Tag::select('id', 'tag_name')->get();
         $category_slug = DB::table('categories')->select('slug')->where('id', '=', $product->category_id)->value('slug'); */
-        $categories=Category::select('id','category_name')->orderBy('id','DESC')->get();
-        return view('products.show', compact('product','categories'));
+        $categories = Category::select('id', 'category_name')->orderBy('id', 'DESC')->get();
+        return view('products.show', compact('product', 'categories'));
     }
 
     /**
@@ -82,9 +84,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        $categories=Category::select('id','category_name')->orderBy('id','DESC')->get();
+        $categories = Category::select('id', 'category_name')->orderBy('id', 'DESC')->get();
 
-        return view('products.edit',compact('product','categories'));
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -93,7 +95,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $request->validated();
-       /*  if ($request->has('tags')) {
+        /*  if ($request->has('tags')) {
             $tagIds = $request->input('tags');
             $product->tags()->attach($tagIds, ['product_id' => $product->id]);
         }
@@ -107,6 +109,8 @@ class ProductController extends Controller
             'description' => $request->get('description'),
             'slug' => Str::slug($request->get('name')),
             'category_id' => $request->get('category'),
+            'filesize' => round($request->file('upload')->getSize() / 1048576, 2), // Convert bytes to megabytes
+            'filetype' => $request->file('upload')->extension(),
             'upload' => $request->hasFile('upload') ? $request->file('upload')->storeAs('public', time() . '_' . $request->file('upload')->getClientOriginalName()) : $product->upload
         ]);
 
@@ -127,16 +131,17 @@ class ProductController extends Controller
     {
         $product = Product::onlyTrashed()->findOrFail($id);
         $product->restore();
-        return redirect('products' )->with('success', 'product restaurado com sucesso!');
+        return redirect('products')->with('success', 'product restaurado com sucesso!');
     }
     public function forceDelete($id)
     {
-        $product =Product::onlyTrashed()->findOrFail($id);
+        $product = Product::onlyTrashed()->findOrFail($id);
         if ($product->upload) {
             Storage::delete($product->upload);
         }
-/*         $product->tags()->detach();
- */        $product->forceDelete();
+        /*         $product->tags()->detach();
+ */
+        $product->forceDelete();
         return redirect('products')->with('success', 'product removido permanentemente com sucesso!');
     }
     public function downloadFile(Product $product)

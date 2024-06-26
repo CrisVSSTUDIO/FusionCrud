@@ -1,5 +1,7 @@
 @extends('home')
 @section('crud-content')
+<x-card title="Manage products">
+
     <!-- Modal restaurar-->
     <div class="modal fade" id="restoreModal" tabindex="-1" aria-labelledby="restoreLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -36,7 +38,6 @@
         </div>
     </div>
 
-    <x-card title="Trashed items">
 
     <!-- Pills navs -->
     <ul class="nav nav-pills " id="pills-tab" role="tablist">
@@ -122,7 +123,7 @@
             </div>
         </div>
     </div>
-</x-card>      
+</x-card>
 
 
 <script type="module">
