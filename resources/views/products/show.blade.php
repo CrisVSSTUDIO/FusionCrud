@@ -1,25 +1,24 @@
 @extends('home')
 @section('crud-content')
-<style>
+    <style>
+        model-viewer {
+            width: auto;
+        }
 
-model-viewer{
-    width:auto;
-}
-model-viewer.modal-fl-area-view {
-    width: 100%;
-    height: 100%;
-}
+        model-viewer.modal-fl-area-view {
+            width: 100%;
+            height: 100%;
+        }
 
-.modal-fl-area-img {
-    height: 100%
-}
+        .modal-fl-area-img {
+            height: 100%
+        }
 
-iframe.modal-fl-area-pdf {
-    height: 100% !important;
-    width: -webkit-fill-available !important
-}
-
-</style>
+        iframe.modal-fl-area-pdf {
+            height: 100% !important;
+            width: -webkit-fill-available !important
+        }
+    </style>
     @php
         $filextension = pathinfo($product->upload, PATHINFO_EXTENSION);
     @endphp
@@ -83,8 +82,8 @@ iframe.modal-fl-area-pdf {
                                 @break
 
                                 @case($filextension == 'pdf' || $filextension == 'webm')
-                                    <link rel="import"  src="{{ asset('storage/' . $product->upload) }}"
-                                        title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top">
+                                    <iframe src="{{ asset('storage/' . $asset->upload) }}" title="{{ $asset->name ?? 'Sem nome' }}"
+                                        class="card-img-top"></iframe>
                                 @break
 
                                 @case($filextension == 'csv')
@@ -106,7 +105,7 @@ iframe.modal-fl-area-pdf {
             </div>
         @endif
         <!-- Modal editar -->
-     {{--    <div class="modal fade" id="modal_editar{{ $product->id }}" tabindex="-1" aria-labelledby="{{ $product->id }}"
+        {{--    <div class="modal fade" id="modal_editar{{ $product->id }}" tabindex="-1" aria-labelledby="{{ $product->id }}"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -142,7 +141,7 @@ iframe.modal-fl-area-pdf {
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- 
+                            {{--
                        <div class="form-group p-2">
                             <label for="name">Tags do asset</label>
                             <select class="form-select" aria-label="Multiple select example" id="assetags" name="assetags[]" multiple>
@@ -161,7 +160,7 @@ iframe.modal-fl-area-pdf {
                             </select>
                         </div> --}}
 
-                           {{--  <div class="form-group p-2">
+        {{--  <div class="form-group p-2">
 
                                 <label for="formFile" class="form-label">Escolha um arquivo</label>
                                 <input class="form-control" type="file" id="upload" name="upload">
@@ -174,7 +173,7 @@ iframe.modal-fl-area-pdf {
                 </div>
             </div>
         </div> --}}
- 
+
         <!-- Modal remover -->
         {{-- <div class="modal fade" id="modal_remover{{ $product->id }}" tabindex="-1"
             aria-labelledby="{{ $product->id }}" aria-hidden="true">
@@ -209,7 +208,7 @@ iframe.modal-fl-area-pdf {
                             @case($filextension == 'glb')
                                 <model-viewer alt="{{ $product->name ?? 'Sem nome' }}"
                                     src="{{ asset('storage/' . $product->upload) }}" ar camera-controls touch-action="pan-y"
-                                    loading="lazy" ></model-viewer>
+                                    loading="lazy"></model-viewer>
                             @break
 
                             @case($filextension == 'zip' || $filextension == 'rar')
@@ -223,7 +222,7 @@ iframe.modal-fl-area-pdf {
                             @break
 
                             @case($filextension == 'pdf')
-                                <link rel="import"  src="{{ asset('storage/' . $product->upload) }}"
+                                <link rel="import" src="{{ asset('storage/' . $product->upload) }}"
                                     title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top">
                             @break
 
@@ -241,39 +240,38 @@ iframe.modal-fl-area-pdf {
                         @endswitch
                     @endif
                     <hr>
-                    <h3 >{{ $product->name ?? 'Sem nome' }}</h3>
-                    <span >{{ $product->description ?? 'Sem descrição' }}</span>
+                    <h3>{{ $product->name ?? 'Sem nome' }}</h3>
+                    <span>{{ $product->description ?? 'Sem descrição' }}</span>
                     <p>
                         {{--    @foreach ($product->tags as $tag)
                         <span class="badge rounded-pill text-bg-primary text-white">{{ $tag->tag_name ?? 'Sem tags' }}</span>
                         @endforeach --}}
-            
+
 
 
                         <button class="btn btn-primary rounded-pill px-3 mt-4 " type="button" data-bs-toggle="collapse"
-                            data-bs-target="#f{{ $product->id }}" aria-expanded="false"
-                            aria-controls="collapseExample">
+                            data-bs-target="#f{{ $product->id }}" aria-expanded="false" aria-controls="collapseExample">
                             Expandir ações <i class="fa-solid fa-chevron-down"></i>
                         </button>
-                        </p>
-                        <div class="collapse" id="f{{ $product->id }}">
-                            @if ($filextension)
-                                @if ($filextension == 'zip' || $filextension == 'rar')
-                                    <a href="{{ route('download', $product->slug) }}"
-                                        class="btn btn-primary  rounded-pill px-3  mt-2" title="Download"
-                                        id="{{ $product->name }}" onclick="downloadTest(this.id)">
+                    </p>
+                    <div class="collapse" id="f{{ $product->id }}">
+                        @if ($filextension)
+                            @if ($filextension == 'zip' || $filextension == 'rar')
+                                <a href="{{ route('download', $product->slug) }}"
+                                    class="btn btn-primary  rounded-pill px-3  mt-2" title="Download"
+                                    id="{{ $product->name }}" onclick="downloadTest(this.id)">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
-                                            <path
-                                                d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
-                                            <path
-                                                d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
-                                        </svg>
-                                        Download</a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
+                                        <path
+                                            d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                                        <path
+                                            d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
+                                    </svg>
+                                    Download</a>
 
 
-                             {{--        <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
+                                {{--        <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
                                         data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}"
                                         title="Editar">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -283,7 +281,7 @@ iframe.modal-fl-area-pdf {
                                         </svg>
                                         Editar
                                     </button> --}}
-                                  {{--   <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2"
+                                {{--   <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2"
                                         data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}"
                                         title="Remover">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -293,22 +291,22 @@ iframe.modal-fl-area-pdf {
                                         </svg>
                                         Remover
                                     </button> --}}
-                                @elseif ($filextension == 'csv')
-                                    <a href="{{ route('download', $product->slug) }}"
-                                        class="btn btn-primary  rounded-pill px-3  mt-2" title="Download"
-                                        id="{{ $product->name }}" onclick="downloadTest(this.id)">
+                            @elseif ($filextension == 'csv')
+                                <a href="{{ route('download', $product->slug) }}"
+                                    class="btn btn-primary  rounded-pill px-3  mt-2" title="Download"
+                                    id="{{ $product->name }}" onclick="downloadTest(this.id)">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
-                                            <path
-                                                d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
-                                            <path
-                                                d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
-                                        </svg>
-                                        Download</a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
+                                        <path
+                                            d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                                        <path
+                                            d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
+                                    </svg>
+                                    Download</a>
 
 
-                             {{--        <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
+                                {{--        <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
                                         data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}"
                                         title="Editar">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -318,7 +316,7 @@ iframe.modal-fl-area-pdf {
                                         </svg>
                                         Editar
                                     </button> --}}
-                                  {{--   <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2"
+                                {{--   <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2"
                                         data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}"
                                         title="Remover">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -328,78 +326,76 @@ iframe.modal-fl-area-pdf {
                                         </svg>
                                         Remover
                                     </button> --}}
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary rounded-pill px-3  text-white mt-2"
-                                        data-bs-toggle="modal" data-bs-target="#modalTrain{{ $product->id }}">
-                                        <i class="fa-solid fa-shapes"></i> Treinar modelo </button>
-                                @else
-                                    <button type="button" class="btn btn-info  rounded-pill px-3  text-white mt-2"
-                                        data-bs-toggle="modal" data-bs-target="#modal_detalhes{{ $product->id }}"
-                                        title="Detalhes">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
-                                        </svg>
-                                        Tela cheia
-                                    </button>
-                                    <a href="{{ route('download', $product->slug) }}"
-                                        class="btn btn-primary  rounded-pill px-3  mt-2" title="Download"
-                                        id="{{ $product->name }}" onclick="downloadTest(this.id)">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
-                                            <path
-                                                d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
-                                            <path
-                                                d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
-                                        </svg>
-                                        Download</a>
-
-
-                             {{--        <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
-                                        data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}"
-                                        title="Editar">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                            <path
-                                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                        </svg>
-                                        Editar
-                                    </button> --}}
-                                  {{--   <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2"
-                                        data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}"
-                                        title="Remover">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path
-                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                        </svg>
-                                        Remover
-                                    </button> --}}
-                                @endif
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary rounded-pill px-3  text-white mt-2"
+                                    data-bs-toggle="modal" data-bs-target="#modalTrain{{ $product->id }}">
+                                    <i class="fa-solid fa-shapes"></i> Treinar modelo </button>
                             @else
-                                <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
-                                    data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}"
-                                    title="Editar">
+                                <button type="button" class="btn btn-info  rounded-pill px-3  text-white mt-2"
+                                    data-bs-toggle="modal" data-bs-target="#modal_detalhes{{ $product->id }}"
+                                    title="Detalhes">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                        <path
-                                            d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                        fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
                                     </svg>
-                                    Editar
+                                    Tela cheia
                                 </button>
-                                <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2"
-                                    data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}"
-                                    title="Remover">
+                                <a href="{{ route('download', $product->slug) }}"
+                                    class="btn btn-primary  rounded-pill px-3  mt-2" title="Download"
+                                    id="{{ $product->name }}" onclick="downloadTest(this.id)">
+
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
                                         <path
-                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                            d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                                        <path
+                                            d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
                                     </svg>
-                                    Remover
-                                </button>
+                                    Download</a>
+
+
+                                {{--        <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
+                                        data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}"
+                                        title="Editar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                        </svg>
+                                        Editar
+                                    </button> --}}
+                                {{--   <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2"
+                                        data-bs-toggle="modal" data-bs-target="#modal_remover{{ $product->id }}"
+                                        title="Remover">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path
+                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                        </svg>
+                                        Remover
+                                    </button> --}}
                             @endif
+                        @else
+                            <button type="button" class="btn btn-primary  rounded-pill px-3  mt-2"
+                                data-bs-toggle="modal" data-bs-target="#modal_editar{{ $product->id }}" title="Editar">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                </svg>
+                                Editar
+                            </button>
+                            <button type="button" class="btn btn-danger  rounded-pill px-3  mt-2" data-bs-toggle="modal"
+                                data-bs-target="#modal_remover{{ $product->id }}" title="Remover">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                </svg>
+                                Remover
+                            </button>
+                        @endif
                 </x-card>
             </div>
 

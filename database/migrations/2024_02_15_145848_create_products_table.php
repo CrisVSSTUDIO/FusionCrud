@@ -21,9 +21,9 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete("cascade");
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
-            $table->string('filetype');
-            $table->string('filesize');
-            $table->string('filetype_prediction');
+            $table->string('filetype')->nullable();
+            $table->string('filesize')->nullable();
+            $table->string('filetype_prediction')->nullable();
             $table->index(['created_at', 'updated_at']);
             $table->softDeletes();
         });

@@ -8,6 +8,7 @@ use App\Models\Category;
 use Phpml\Metric\Accuracy;
 use Illuminate\Http\Request;
 use Phpml\Clustering\DBSCAN;
+use Phpml\Clustering\KMeans;
 use Phpml\Association\Apriori;
 use Phpml\Dataset\ArrayDataset;
 use Illuminate\Support\Facades\DB;
@@ -231,6 +232,5 @@ class AnalyticsController extends Controller
         $res = array_fill_keys(array_values($labels), $samples);
         $kmeans = new DBSCAN($epsilon = 2, $minSamples = 3);;
         $potato = $kmeans->cluster($res);
-        dd($potato);
     }
 }
