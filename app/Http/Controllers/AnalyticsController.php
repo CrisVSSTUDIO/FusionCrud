@@ -21,6 +21,7 @@ use Phpml\Metric\ClassificationReport;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use Phpml\CrossValidation\StratifiedRandomSplit;
+use Phpml\Regression\SVR;
 
 class AnalyticsController extends Controller
 {
@@ -28,12 +29,12 @@ class AnalyticsController extends Controller
     public function index()
     {
         $averageProductsPerDay = round($this->averageProducts());
-        $predictions = $this->naiveBayes();
+        // $predictions = $this->naiveBayes();
         //list($isVirtual, $isNotVirtual) = $this->virtualCategories();
         list($product_name, $product_count) = $this->ProductPerCategory();
         list($perYear, $yearCount) = $this->ProductsPerDate();
         list($apriori) = $this->patterns();
-        return view('analytics.index', ['created_at' => json_encode($product_name), 'rowcount' => json_encode($product_count), 'averageProductsPerDay' => $averageProductsPerDay, 'perYear' => json_encode($perYear), 'yearCount' => json_encode($yearCount), 'apriori' => json_encode($apriori), 'predictions' => json_encode($predictions)]);
+        return view('analytics.index', ['created_at' => json_encode($product_name), 'rowcount' => json_encode($product_count), 'averageProductsPerDay' => $averageProductsPerDay, 'perYear' => json_encode($perYear), 'yearCount' => json_encode($yearCount), 'apriori' => json_encode($apriori)]);
     }
     public function ProductPerCategory()
     {
@@ -70,7 +71,7 @@ class AnalyticsController extends Controller
                 foreach ($perYear as $year) {
                     $multi_array[] = array($year);
                 }
-                $regression = new LeastSquares();
+                $regression = new SVR();
                 $regression->train($multi_array, $yearCount);
                 $predict_value = $regression->predict([$prevNextFiveYears]);
                 array_push($yearCount, $predict_value);
@@ -134,50 +135,50 @@ class AnalyticsController extends Controller
             return array($associator->apriori());
         }
     }
-    public function naiveBayes()
-    {
-        // Retrieve file types and sizes from the database
-        $files = Product::select('id', 'filetype', 'filesize')
-            ->whereNull('deleted_at')
-            ->orderBy('filesize')
-            ->take(500)
-            ->get();
+    // public function naiveBayes()
+    // {
+    //     // Retrieve file types and sizes from the database
+    //     $files = Product::select('id', 'filetype', 'filesize')
+    //         ->whereNull('deleted_at')
+    //         ->orderBy('filesize')
+    //         ->take(500)
+    //         ->get();
 
-        // Check if files collection is not empty
-        if ($files->isEmpty()) {
-            return;
-        }
+    //     // Check if files collection is not empty
+    //     if ($files->isEmpty()) {
+    //         return;
+    //     }
 
-        // Prepare the dataset
-        $samples = $files->pluck('filesize')->map(function ($size) {
-            return [$size];
-        })->all();
-        $labels = $files->pluck('filetype')->all();
+    //     // Prepare the dataset
+    //     $samples = $files->pluck('filesize')->map(function ($size) {
+    //         return [$size];
+    //     })->all();
+    //     $labels = $files->pluck('filetype')->all();
 
-        // Create the dataset
-        $dataset = new ArrayDataset($samples, $labels);
+    //     // Create the dataset
+    //     $dataset = new ArrayDataset($samples, $labels);
 
-        // Split the dataset
-        $split = new StratifiedRandomSplit($dataset);
+    //     // Split the dataset
+    //     $split = new StratifiedRandomSplit($dataset);
 
-        // Create and Test the Naive Bayes classifier
-        $classifier = new NaiveBayes();
-        $classifier->train($split->getTrainSamples(), $split->getTrainLabels());
+    //     // Create and Test the Naive Bayes classifier
+    //     $classifier = new NaiveBayes();
+    //     $classifier->train($split->getTrainSamples(), $split->getTrainLabels());
 
-        // Predict file types for test samples
-        $predictions = $classifier->predict($samples);
-        $classificationRport = new ClassificationReport($labels, $predictions);
-        $accuracy = Accuracy::score($labels, $predictions);
+    //     // Predict file types for test samples
+    //     $predictions = $classifier->predict($samples);
+    //     $classificationRport = new ClassificationReport($labels, $predictions);
+    //     $accuracy = Accuracy::score($labels, $predictions);
 
-        // Update database records with predictions
-        foreach ($predictions as $index => $prediction) {
-            DB::table('Products')
-                ->where('id', $files[$index]->id)
-                ->update(['filetype_prediction' => $prediction]);
-        }
-        // Return accuracy and predictions
-        return ['accuracy' => $accuracy, 'predictions' => $predictions];
-    }
+    //     // Update database records with predictions
+    //     foreach ($predictions as $index => $prediction) {
+    //         DB::table('Products')
+    //             ->where('id', $files[$index]->id)
+    //             ->update(['filetype_prediction' => $prediction]);
+    //     }
+    //     // Return accuracy and predictions
+    //     return ['accuracy' => $accuracy, 'predictions' => $predictions];
+    // }
     public function kMeans()
     {
         $samples = [];

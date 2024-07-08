@@ -82,8 +82,8 @@
                                 @break
 
                                 @case($filextension == 'pdf' || $filextension == 'webm')
-                                    <iframe src="{{ asset('storage/' . $asset->upload) }}" title="{{ $asset->name ?? 'Sem nome' }}"
-                                        class="card-img-top"></iframe>
+                                    <iframe src="{{ asset('storage/' . $product->upload) }}"
+                                        title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top h-100"></iframe>
                                 @break
 
                                 @case($filextension == 'csv')
@@ -221,9 +221,9 @@
                                 </svg>
                             @break
 
-                            @case($filextension == 'pdf')
-                                <link rel="import" src="{{ asset('storage/' . $product->upload) }}"
-                                    title="{{ $product->name ?? 'Sem nome' }}" class="card-img-top">
+                            @case($filextension == 'pdf' || $filextension == 'webm')
+                                <iframe src="{{ asset('storage/' . $product->upload) }}" title="{{ $product->name ?? 'Sem nome' }}"
+                                    class="card-img-top h-100"></iframe>
                             @break
 
                             @case($filextension == 'csv')
